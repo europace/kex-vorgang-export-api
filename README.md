@@ -1,8 +1,38 @@
 # KEX-Vorgang-Export-API
 Die Schnittstelle ermöglicht das automatisierte auslesen von Vorgängen in Kreditsmart.
 
+# Table of Contents
 
-## Auslesen eines Vorgangs
+* [Allgemeines](#allgemeines)
+* [Authentifizierung](#authentifizierung)
+* [TraceId zur Nachverfolgbarkeit von Requests](#traceid-zur-nachverfolgbarkeit-von-requests)
+* [Content-Type](#content-type)
+* [Beispiel](#beispiel)
+   * [POST Request:](#post-request)
+   * [POST Response:](#post-response)
+* [Fehlercodes](#fehlercodes)
+   * [HTTP-Status Errors](#http-status-errors)
+   * [Validation Error](#validation-error)
+   * [weitere Fehler](#weitere-fehler)
+* [Request Format](#request-format)
+   * [Vorgang](#vorgang)
+   * [Partner](#partner)
+      * [Antragsteller](#antragsteller)
+      * [Personendaten](#personendaten)
+      * [Wohnsituation](#wohnsituation)
+      * [Beschäftigung](#beschäftigung)
+         * [Arbeiter und Angestellter](#arbeiter-und-angestellter)
+         * [Selbstständiger und Freiberufler](#selbstständiger-und-freiberufler)
+         * [Beamter](#beamter)
+         * [Arbeitgeber](#arbeitgeber)
+      * [Haushalt](#haushalt)
+         * [Antragstellerzuordnung](#antragstellerzuordnung)
+         * [Kind](#kind)
+      * [Finanzbedarf](#finanzbedarf)
+* [Response Format](#response-format)
+
+
+## Allgemeines
 
 Vorgänge können über unsere GraphQL Schnittstelle via **HTTP POST** ausgelesen werden werden.
 
@@ -16,6 +46,7 @@ Die gewünschten Properties werden als JSON im Body des POST Requests übermitte
 Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 SUCCESS**.
 
 Die angeforderten Daten werden ebenfalls als JSON übermittelt.
+
 
 ## Authentifizierung
 
@@ -37,6 +68,7 @@ Request Header Name</th><th>	Beschreibung</th>
 Das API JWT (JSON Web Token) erhalten Sie von Ihrem Ansprechpartner im **Kredit**Smart-Team. 
 
 Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
+
 
 ## TraceId zur Nachverfolgbarkeit von Requests
 
@@ -73,7 +105,9 @@ Request Header Name</th><th>	Header Value</th>
 </tr>
 </table>
 
-### POST Request Beispiel:
+
+## Beispiel 
+### POST Request:
 [//]: # (TODO hier die richtige URL) 
     POST http://kex-vorgang-export.pku.rz-europace.local/vorgaenge
     X-Authentication: xxxxxxx
@@ -86,7 +120,7 @@ Request Header Name</th><th>	Header Value</th>
       }
     }
     
-### POST Response Beispiel:
+### POST Response:
 
     {
       "data": {
@@ -258,7 +292,7 @@ Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
 Die befüllten Felder zur Beschäftigung sind abhängig von der Beschäftigungsart.  
 Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüllt
 
-#### Arbeiter und Angestellter
+##### Arbeiter und Angestellter
 
 	{
 		"beschaeftigungsverhaeltnis": {
@@ -269,7 +303,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüll
 		}
 	}
 
-#### Selbstständiger und Freiberufler
+##### Selbstständiger und Freiberufler
 
 	{
 		"firma": {
@@ -277,7 +311,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüll
 		}
 	}
 
-#### Beamter
+##### Beamter
 
 	{
 		"beschaeftigungsverhaeltnis": {
@@ -286,7 +320,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüll
 		},
 	}
 
-#### Arbeitgeber
+##### Arbeitgeber
 
 	{
 		"name": String
@@ -305,11 +339,11 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüll
 		}
 	}
 
-#### Antragstellerzuordnung
+##### Antragstellerzuordnung
 
 	"ANTRAGSTELLER_1" | "ANTRAGSTELLER_2" | "BEIDE"
 
-#### Kind
+##### Kind
 
 	{
 		"name": String,
@@ -332,6 +366,7 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüll
 	}
 
 Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" gesetzt ist.
+
 
 ## Response Format
 

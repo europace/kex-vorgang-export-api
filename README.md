@@ -51,7 +51,7 @@ Die angeforderten Daten werden ebenfalls als JSON übermittelt.
 Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über einen HTTP Header.
 
 | Request Header Name | Beschreibung                      |
-|:--------------------|:----------------------------------|
+|---------------------|-----------------------------------|
 | X-Authentication    | API JWT der Vertriebsorganisation |
 
 
@@ -64,7 +64,7 @@ Die Übermittlung der X-TraceId erfolgt über einen HTTP-Header. Dieser Header i
 wenn er nicht gesetzt ist, wird eine ID vom System generiert.
 
 | Request Header Name | Beschreibung                    | Beispiel    |
-|--------------------|--------------------------------|------------|
+|---------------------|---------------------------------|-------------|
 | X-TraceId           | eindeutige Id für jeden Request | sys12345678 |
 
 [//]: # (TODO RM brauchen wir das?) 
@@ -74,7 +74,7 @@ Die Schnittstelle akzeptiert Daten mit Content-Type "**application/json**".
 Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich das Encoding, wenn es nicht UTF-8 ist.
 
 | Request Header Name |   Header Value   |
-|--------------------|-----------------|
+|---------------------|------------------|
 | Content-Type        | application/json |
 
 ## Beispiel 
@@ -118,7 +118,7 @@ In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufget
 ### HTTP-Status Errors
 
 | Fehlercode | Nachricht       | weitere Attribute          | Erklärung                            |
-|-----------|----------------|---------------------------|-------------------------------------|
+|------------|-----------------|----------------------------|--------------------------------------|
 | 401        | Unauthorized    | -                          | Authentifizierung ist fehlgeschlagen |
 | 410        | Vorgang deleted | "vorgangsnummer": "123456" | Der Vorgang wurde gelöscht           |
 
@@ -162,7 +162,7 @@ Wenn der Request nicht erfolgreich verarbeitet werden konnte, liefert die Schnit
     }
 
 | Fehlercode | Nachricht                  | Erklärung                                                                                      |
-|-----------|---------------------------|-----------------------------------------------------------------------------------------------|
+|------------|----------------------------|------------------------------------------------------------------------------------------------|
 | 403        | Insufficient access rights | Es wird versucht auf einen Vorgang zuzugreifen, den die Vertriebsorganisation nicht lesen darf |
 
 
@@ -197,111 +197,111 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
 
 ### Partner
 
-	{
-		"partnerId": String
-	}
+    {
+      "partnerId": String
+    }
 
 Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12. 
 
 ### Antragsteller
 
     {
-		"personendaten": Personendaten,
-		"wohnsituation": Wohnsituation,
-		"beschaeftigung": Beschäftigung
-	}
+      "personendaten": Personendaten,
+      "wohnsituation": Wohnsituation,
+      "beschaeftigung": Beschäftigung
+    }
 
 
 #### Personendaten
 
     {
-		"anrede": "FRAU" | "HERR",
-		"email": String
-		"familienstand": "LEDIG" | "VERHEIRATET" | "GESCHIEDEN" | "VERWITWET" | "GETRENNT_LEBEND" | "EHEAEHNLICHE_LEBENSGEMEINSCHAFT" | "EINGETRAGENE_LEBENSPARTNERSCHAFT",
-		"geburtsdatum": "YYYY-MM-DD",
-		"nachname": String,
-		"telefonGeschaeftlich": String,
-		"telefonPrivat": String,
-		"titel": [ "DOKTOR" | "PROFESSOR" ]
-		"vorname": String,
-	}
+      "anrede": "FRAU" | "HERR",
+      "email": String
+      "familienstand": "LEDIG" | "VERHEIRATET" | "GESCHIEDEN" | "VERWITWET" | "GETRENNT_LEBEND" | "EHEAEHNLICHE_LEBENSGEMEINSCHAFT" | "EINGETRAGENE_LEBENSPARTNERSCHAFT",
+      "geburtsdatum": "YYYY-MM-DD",
+      "nachname": String,
+      "telefonGeschaeftlich": String,
+      "telefonPrivat": String,
+      "titel": [ "DOKTOR" | "PROFESSOR" ]
+      "vorname": String,
+    }
 	
 
 #### Wohnsituation
 
-	{
-		"anschrift": {
-			"strasse": String,
-			"hausnummer": String,
-			"plz": String,
-			"ort": String,
-		},
-		"gemeinsamerHaushalt": true | false
-	}
+    {
+      "anschrift": {
+        "strasse": String,
+        "hausnummer": String,
+        "plz": String,
+        "ort": String,
+      },
+      "gemeinsamerHaushalt": true | false
+    }
 
 Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
 
 #### Beschäftigung
 
 
-	{
-		"beschaeftigungsart": "ANGESTELLTER" | "ARBEITER" | "ARBEITSLOSER" | "BEAMTER" | "FREIBERUFLER" | "HAUSFRAU" | "RENTNER" | "SELBSTSTAENDIGER",
-		"angestellter": Angestellter,				
-		"arbeiter": Arbeiter,
-		"beamter": Beamter,
-		"freiberufler": Freiberufler,
-		"selbststaendiger": Selbstständiger
-	}
+  	{ 
+      "beschaeftigungsart": "ANGESTELLTER" | "ARBEITER" | "ARBEITSLOSER" | "BEAMTER" | "FREIBERUFLER" | "HAUSFRAU" | "RENTNER" | "SELBSTSTAENDIGER",
+      "angestellter": Angestellter,				
+      "arbeiter": Arbeiter,
+      "beamter": Beamter,
+      "freiberufler": Freiberufler,
+      "selbststaendiger": Selbstständiger
+    }
 
 Die befüllten Felder zur Beschäftigung sind abhängig von der Beschäftigungsart.  
 __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüllt
 
 ##### Arbeiter und Angestellter
 
-	{
-		"beschaeftigungsverhaeltnis": {
-			"arbeitgeber": Arbeitgeber,
-			"befristung": "BEFRISTET" | "UNBEFRISTET",
-			"befristetBis": "YYYY-MM-DD",
-			"inProbezeit": true | false
-		}
-	}
+    {
+      "beschaeftigungsverhaeltnis": {
+        "arbeitgeber": Arbeitgeber,
+        "befristung": "BEFRISTET" | "UNBEFRISTET",
+        "befristetBis": "YYYY-MM-DD",
+        "inProbezeit": true | false
+      }
+    }
 
 ##### Selbstständiger und Freiberufler
 
-	{
-		"firma": {
-			"name": String
-		}
-	}
+    {
+      "firma": {
+        "name": String
+      }
+    }
 
 ##### Beamter
 
-	{
-		"beschaeftigungsverhaeltnis": {
-			"inProbezeit": true | false,
-			"arbeitgeber": 	Arbeitgeber,
-		},
-	}
+    {
+      "beschaeftigungsverhaeltnis": {
+        "inProbezeit": true | false,
+        "arbeitgeber": 	Arbeitgeber,
+      },
+    }
 
 ##### Arbeitgeber
-
-	{
-		"name": String
-	}
+  
+    {
+      "name": String
+    }
 
 
 #### Haushalt
 
     {
-		"kinder": [ kind ],
-		"kontoverbindung": {
-			"iban": String,
-			"bic": String,
-			"kreditinstitut": String,
-			"gehoertZuAntragsteller": Antragstellerzuordnung
-		}
-	}
+      "kinder": [ kind ],
+      "kontoverbindung": {
+        "iban": String,
+        "bic": String,
+        "kreditinstitut": String,
+        "gehoertZuAntragsteller": Antragstellerzuordnung
+      }
+    }
 
 ##### Antragstellerzuordnung
 
@@ -309,39 +309,40 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
 
 ##### Kind
 
-	{
-		"name": String,
-		"gehoertZuAntragsteller": Antragstellerzuordnung
-	}	
+    {
+      "name": String,
+      "gehoertZuAntragsteller": Antragstellerzuordnung
+    }	
 				
 
 #### Finanzbedarf
 
     {
-		"fahrzeugkauf": {
-      "kaufpreis": Decimal,
+      "fahrzeugkauf": {
+        "kaufpreis": Decimal,
+      }
+      "finanzierungszweck": "UMSCHULDUNG" | "FAHRZEUGKAUF" | "MODERNISIEREN" | "FREIE_VERWENDUNG",
+      "finanzierungswunsch": 			{
+        "laufzeitInMonaten": Integer,
+        "kreditbetrag": Decimal,
+        "rateMonatlich": Decimal
+      }
     }
-		"finanzierungszweck": "UMSCHULDUNG" | "FAHRZEUGKAUF" | "MODERNISIEREN" | "FREIE_VERWENDUNG",
-		"finanzierungswunsch": 			{
-			"laufzeitInMonaten": Integer,
-			"kreditbetrag": Decimal,
-			"rateMonatlich": Decimal
-		}
-	}
 
 Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" gesetzt ist.
 
 #### Antrag
 
     {
-		"teilantragsnummer": String
-    "letzteAenderungAm": "YYYY-MM-DD hh:mm:ss.sss"
-    "antragstellerstatus": {
-      "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN" 
-    produktanbieterstatus": {
-      "status": "NICHT_BEARBEITET" | "UNTERSCHRIEBEN" | "ABGELEHNT" | "AUTOMATISCH_ABGELEHNT" | "ZURUECKGESTELLT" 
+      "teilantragsnummer": String
+      "letzteAenderungAm": "YYYY-MM-DD hh:mm:ss.sss"
+      "antragstellerstatus": {
+        "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN" 
+      "produktanbieterstatus": {
+        "status": "NICHT_BEARBEITET" | "UNTERSCHRIEBEN" | "ABGELEHNT" | "AUTOMATISCH_ABGELEHNT" | "ZURUECKGESTELLT" 
+      }
     }
-	}
+    
 [//]: # (TODO RM Datumsformat von letzteAÄnderungAm?)
 
 ## Response Format

@@ -140,7 +140,7 @@ Request Header Name</th><th>	Header Value</th>
 
 ## Fehlercodes
 
-Die Besonderheit in GraphQL ist u.a., dass nicht alle Fehler direkt als Fehlercodes wiedergegeben werden.
+Die Besonderheit in GraphQL ist u.a., dass die meisten Fehler nicht über HTTP-Fehlercodes wiedergegeben werden.
 In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufgetreten ist. Dafür gibt es den Parameter `errors` in der Response.
 
 ### HTTP-Status Errors

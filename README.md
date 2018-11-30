@@ -8,16 +8,16 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
 * [TraceId zur Nachverfolgbarkeit von Requests](#traceid-zur-nachverfolgbarkeit-von-requests)
 * [Content-Type](#content-type)
 * [Beispiel](#beispiel)
-   * [POST Request:](#post-request)
-   * [POST Response:](#post-response)
+   * [POST Request](#post-request)
+   * [POST Response](#post-response)
 * [Fehlercodes](#fehlercodes)
    * [HTTP-Status Errors](#http-status-errors)
    * [Validation Error](#validation-error)
    * [weitere Fehler](#weitere-fehler)
 * [Request Format](#request-format)
-   * [Vorgang](#vorgang)
+* [Vorgang](#vorgang)
    * [Partner](#partner)
-      * [Antragsteller](#antragsteller)
+   * [Antragsteller](#antragsteller)
       * [Personendaten](#personendaten)
       * [Wohnsituation](#wohnsituation)
       * [Beschäftigung](#beschäftigung)
@@ -29,31 +29,26 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
          * [Antragstellerzuordnung](#antragstellerzuordnung)
          * [Kind](#kind)
       * [Finanzbedarf](#finanzbedarf)
+      * [Antrag](#antrag)
 * [Response Format](#response-format)
-
 
 ## Allgemeines
 
-Vorgänge können über unsere GraphQL Schnittstelle via **HTTP POST** ausgelesen werden werden.
-
+Vorgänge können über unsere GraphQL Schnittstelle via **HTTP POST** ausgelesen werden werden.  
 Die URL für das Auslesen von Vorgängen ist:
 
 [//]: # (TODO hier die richtige URL https://www.europace2.de/kreditsmart/kex/vorgang)
+
     http://kex-vorgang-export.pku.rz-europace.local/vorgaenge
     
-Die gewünschten Properties werden als JSON im Body des POST Requests übermittelt.
-
-Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 SUCCESS**.
-
+Die gewünschten Properties werden als JSON im Body des POST Requests übermittelt.  
+Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 SUCCESS**.  
 Die angeforderten Daten werden ebenfalls als JSON übermittelt.
 
 
 ## Authentifizierung
 
-Für jeden Request ist eine Authentifizierung erforderlich.
-
-Die Authentifizierung erfolgt über einen HTTP-Header.
-
+Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über einen HTTP Header.
 <table>
 <tr>
 <th>
@@ -64,16 +59,11 @@ Request Header Name</th><th>	Beschreibung</th>
 </tr>
 </table>
 
-
-Das API JWT (JSON Web Token) erhalten Sie von Ihrem Ansprechpartner im **Kredit**Smart-Team. 
-
-Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
-
+Das API JWT (JSON Web Token) erhalten Sie von Ihrem Ansprechpartner im KreditSmart-Team. Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
 
 ## TraceId zur Nachverfolgbarkeit von Requests
 
-Für jeden Request soll eine eindeutige ID generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die systemübergreifende Analyse erleichtert.
-
+Für jeden Request soll eine eindeutige ID generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die systemübergreifende Analyse erleichtert.  
 Die Übermittlung der X-TraceId erfolgt über einen HTTP-Header. Dieser Header ist optional,
 wenn er nicht gesetzt ist, wird eine ID vom System generiert.
 
@@ -91,8 +81,7 @@ wenn er nicht gesetzt ist, wird eine ID vom System generiert.
 [//]: # (TODO RM brauchen wir das?) 
 ## Content-Type
 
-Die Schnittstelle akzeptiert Daten mit Content-Type "**application/json**".
-
+Die Schnittstelle akzeptiert Daten mit Content-Type "**application/json**".  
 Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich das Encoding, wenn es nicht UTF-8 ist.
 
 <table>
@@ -107,8 +96,9 @@ Request Header Name</th><th>	Header Value</th>
 
 
 ## Beispiel 
-### POST Request:
+### POST Request
 [//]: # (TODO hier die richtige URL) 
+
     POST http://kex-vorgang-export.pku.rz-europace.local/vorgaenge
     X-Authentication: xxxxxxx
     Content-Type: application/json;charset=utf-8
@@ -120,7 +110,7 @@ Request Header Name</th><th>	Header Value</th>
       }
     }
     
-### POST Response:
+### POST Response
 
     {
       "data": {
@@ -151,8 +141,7 @@ In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufget
 </table>
 
 ### Validation Error
-Wenn die GraphQL-Query nicht verarbeitet werden kann, wird eine Response mit errorType `ValidationError` zurückgegeben.  
-
+Wenn die GraphQL-Query nicht verarbeitet werden kann, wird eine Response mit errorType `ValidationError` zurückgegeben.   
 Im Beispiel wurde die o.g. query ausgeführt, und das Feld vorgangsnummer falsch geschrieben (vorgangsnummerr).
 
     {
@@ -198,36 +187,31 @@ Wenn der Request nicht erfolgreich verarbeitet werden konnte, liefert die Schnit
 
 ## Request Format
 
-Die Angaben werden als JSON im Body des Requests gesendet.
+Die Angaben werden als JSON im Body des Requests gesendet. Für eine bessere Lesbarkeit wird das Gesamtformat in *Typen* aufgebrochen, die an anderer Stelle definiert sind, aber an verwendeter Stelle eingesetzt werden müssen.
+Die Attribute innerhalb eines Blocks können in beliebiger Reihenfolge angegeben werden.  
+Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden sein (siehe auch den [Beispiel Request](#post-request)):
 
-Für eine bessere Lesbarkeit wird das Gesamtformat in *Typen* aufgebrochen, die an anderer Stelle definiert sind, aber an verwendeter Stelle eingesetzt werden müssen.
-Die Attribute innerhalb eines Blocks können in beliebiger Reihenfolge angegeben werden.
-
-Für einen erfolgreichen Request gibt es derzeit nur ein definiertes Pflichtfeld (siehe „Vorgang“).
-
-Alle übermittelten Daten werden in **Kredit**Smart übernommen, mit Ausnahme von:
-
-* Angaben, die aufgrund eines abweichenden Formats nicht verstanden werden (z. B. "1" statt "true", "01.01.2016" statt "2016-01-01"), und 
-* Angaben, die aufgrund der Datenkonstellationen überflüssig bzw. unstimmig sind (z. B. Angabe beim 1. Antragsteller zu gemeinsamerHaushalt).
+    vorgang(vorgangsnummer: <vorgangsnummer>) {
+        <gewünschte Felder>
+    }
 
 
-An verschiedenen Stellen im Request ist die Angabe eines Landes oder der Staatsangehörigkeit notwendig:
-Die Übermittlung erfolgt im Format [ISO-3166/ALPHA-2](https://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste)
-
-### Vorgang
+## Vorgang
 
     {
       "kundenbetreuer": Partner,
       "bearbeiter": Partner,
       "leadquelle": String,
       "eigeneVorgangsnummer": String,
+      "vorgangsnummer": String,
       "antragsteller1": Antragsteller,
       "antragsteller2": Antragsteller,
       "haushalt": Haushalt,
       "finanzbedarf": Finanzbedarf,
       "letzteAenderungAm": "YYYY-MM-DD hh-mm-ss.sss"
+      "antraege": [Antrag]
     }
-[//]: # (TODO RM Datumsformat?)
+[//]: # (TODO RM Datumsformat von letzteAÄnderungAm?)
 
 
 ### Partner
@@ -238,7 +222,7 @@ Die Übermittlung erfolgt im Format [ISO-3166/ALPHA-2](https://de.wikipedia.org/
 
 Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12. 
 
-#### Antragsteller
+### Antragsteller
 
     {
 		"personendaten": Personendaten,
@@ -289,7 +273,7 @@ Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
 	}
 
 Die befüllten Felder zur Beschäftigung sind abhängig von der Beschäftigungsart.  
-Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüllt
+__Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüllt
 
 ##### Arbeiter und Angestellter
 
@@ -366,11 +350,22 @@ Beispiel: *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüll
 
 Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" gesetzt ist.
 
+#### Antrag
+
+    {
+		"teilantragsnummer": String
+    "letzteAenderungAm": "YYYY-MM-DD hh:mm:ss.sss"
+    "antragstellerstatus": {
+      "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN" 
+    produktanbieterstatus": {
+      "status": "NICHT_BEARBEITET" | "UNTERSCHRIEBEN" | "ABGELEHNT" | "AUTOMATISCH_ABGELEHNT" | "ZURUECKGESTELLT" 
+    }
+	}
+[//]: # (TODO RM Datumsformat von letzteAÄnderungAm?)
 
 ## Response Format
 
-Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response gesendet.  
-Nicht befüllte Felder werden nicht zurückgegeben.
+Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response gesendet. Nicht befüllte Felder werden nicht zurückgegeben.
 
     { 
       "data": {

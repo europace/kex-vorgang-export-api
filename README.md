@@ -1,5 +1,5 @@
 # KEX-Vorgang-Export-API
-Die Schnittstelle ermöglicht das automatisierte auslesen von Vorgängen in Kreditsmart.
+Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in KreditSmart.
 
 # Table of Contents
 

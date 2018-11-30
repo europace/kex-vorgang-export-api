@@ -151,7 +151,7 @@ In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufget
 </table>
 
 ### Validation Error
-Wenn die GraphQL Query nicht verarbeitet werden kann, werden sie eine response mit dem errorType ~ValidationError` erhalten.  
+Wenn die GraphQL Query nicht verarbeitet werden kann, wird eine Response mit errorType `ValidationError` zurückgegeben.  
 
 Im Beispiel wurde die o.g. query ausgeführt, und das Feld vorgangsnummer falsch geschrieben (vorgangsnummerr).
 

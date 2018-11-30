@@ -49,15 +49,11 @@ Die angeforderten Daten werden ebenfalls als JSON übermittelt.
 ## Authentifizierung
 
 Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über einen HTTP Header.
-<table>
-<tr>
-<th>
-Request Header Name</th><th>	Beschreibung</th>
-</tr>
-<tr>
-<td>X-Authentication</td><td>	API JWT der Vertriebsorganisation</td>
-</tr>
-</table>
+
+| Request Header Name | Beschreibung                      |
+|:--------------------|:----------------------------------|
+| X-Authentication    | API JWT der Vertriebsorganisation |
+
 
 Das API JWT (JSON Web Token) erhalten Sie von Ihrem Ansprechpartner im KreditSmart-Team. Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
 
@@ -67,16 +63,9 @@ Für jeden Request soll eine eindeutige ID generiert werden, die den Request im 
 Die Übermittlung der X-TraceId erfolgt über einen HTTP-Header. Dieser Header ist optional,
 wenn er nicht gesetzt ist, wird eine ID vom System generiert.
 
-<table>
-<tr>
-<th>Request Header Name</th><th>Beschreibung</th><th>Beispiel</th>
-<tr>
-<td>X-TraceId</td>
-<td>eindeutige Id für jeden Request</td>
-<td>sys12345678</td>
-</tr>
-</table>
-
+| Request Header Name | Beschreibung                    | Beispiel    |
+|--------------------|--------------------------------|------------|
+| X-TraceId           | eindeutige Id für jeden Request | sys12345678 |
 
 [//]: # (TODO RM brauchen wir das?) 
 ## Content-Type
@@ -84,16 +73,9 @@ wenn er nicht gesetzt ist, wird eine ID vom System generiert.
 Die Schnittstelle akzeptiert Daten mit Content-Type "**application/json**".  
 Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich das Encoding, wenn es nicht UTF-8 ist.
 
-<table>
-<tr>
-<th>
-Request Header Name</th><th>	Header Value</th>
-</tr>
-<tr>
-<td>Content-Type</td><td>	application/json</td>
-</tr>
-</table>
-
+| Request Header Name |   Header Value   |
+|--------------------|-----------------|
+| Content-Type        | application/json |
 
 ## Beispiel 
 ### POST Request
@@ -134,11 +116,11 @@ Die Besonderheit in GraphQL ist u.a., dass die meisten Fehler nicht über HTTP-F
 In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufgetreten ist. Dafür gibt es den Parameter `errors` in der Response.
 
 ### HTTP-Status Errors
- 
-<table>
-<tr><th>Fehlercode</th><th>Nachricht</th><th>	Erklärung</th></tr>
-<tr><td>401</td><td>Unauthorized</td><td>Authentifizierung ist fehlgeschlagen</td></tr>
-</table>
+
+| Fehlercode | Nachricht       | weitere Attribute          | Erklärung                            |
+|-----------|----------------|---------------------------|-------------------------------------|
+| 401        | Unauthorized    | -                          | Authentifizierung ist fehlgeschlagen |
+| 410        | Vorgang deleted | "vorgangsnummer": "123456" | Der Vorgang wurde gelöscht           |
 
 ### Validation Error
 Wenn die GraphQL-Query nicht verarbeitet werden kann, wird eine Response mit errorType `ValidationError` zurückgegeben.   
@@ -179,10 +161,9 @@ Wenn der Request nicht erfolgreich verarbeitet werden konnte, liefert die Schnit
       ]
     }
 
-<table>
-<tr><th>Fehlercode</th><th>Nachricht</th><th>	Erklärung</th></tr>
-<tr><td>403</td><td>Insufficient access rights</td><td>Es wird versucht auf einen Vorgang zuzugreifen, den die Vertriebsorganisation nicht lesen darf</td></tr>
-</table>
+| Fehlercode | Nachricht                  | Erklärung                                                                                      |
+|-----------|---------------------------|-----------------------------------------------------------------------------------------------|
+| 403        | Insufficient access rights | Es wird versucht auf einen Vorgang zuzugreifen, den die Vertriebsorganisation nicht lesen darf |
 
 
 ## Request Format

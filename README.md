@@ -52,7 +52,7 @@ Die angeforderten Daten werden ebenfalls als JSON übermittelt.
 
 Für jeden Request ist eine Authentifizierung erforderlich.
 
-Die Authentifizierung erfolgt über einen HTTP Header.
+Die Authentifizierung erfolgt über einen HTTP-Header.
 
 <table>
 <tr>
@@ -74,7 +74,7 @@ Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit
 
 Für jeden Request soll eine eindeutige ID generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die systemübergreifende Analyse erleichtert.
 
-Die Übermittlung der X-TraceId erfolgt über einen HTTP Header. Dieser Header ist optional,
+Die Übermittlung der X-TraceId erfolgt über einen HTTP-Header. Dieser Header ist optional,
 wenn er nicht gesetzt ist, wird eine ID vom System generiert.
 
 <table>
@@ -151,7 +151,7 @@ In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufget
 </table>
 
 ### Validation Error
-Wenn die GraphQL Query nicht verarbeitet werden kann, wird eine Response mit errorType `ValidationError` zurückgegeben.  
+Wenn die GraphQL-Query nicht verarbeitet werden kann, wird eine Response mit errorType `ValidationError` zurückgegeben.  
 
 Im Beispiel wurde die o.g. query ausgeführt, und das Feld vorgangsnummer falsch geschrieben (vorgangsnummerr).
 
@@ -370,7 +370,7 @@ Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" geset
 ## Response Format
 
 Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response gesendet.  
-Nicht befüllte felder werden nicht zurückgegeben
+Nicht befüllte Felder werden nicht zurückgegeben.
 
     { 
       "data": {

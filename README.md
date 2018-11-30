@@ -75,7 +75,7 @@ Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit
 Für jeden Request soll eine eindeutige ID generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die systemübergreifende Analyse erleichtert.
 
 Die Übermittlung der X-TraceId erfolgt über einen HTTP Header. Dieser Header ist optional,
-wenn er nicht gesetzt ist, wir eine ID vom System generiert.
+wenn er nicht gesetzt ist, wird eine ID vom System generiert.
 
 <table>
 <tr>

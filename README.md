@@ -189,7 +189,6 @@ Wenn der Request nicht erfolgreich verarbeitet werden konnte, liefert die Schnit
         }
       ]
     }
-Achtung: In diesem Fall wird kein Vorgang in **Kredit**Smart importiert und angelegt.
 
 <table>
 <tr><th>Fehlercode</th><th>Nachricht</th><th>	Erklärung</th></tr>

@@ -189,10 +189,9 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "antragsteller2": Antragsteller,
       "haushalt": Haushalt,
       "finanzbedarf": Finanzbedarf,
-      "letzteAenderungAm": "YYYY-MM-DD hh-mm-ss.sss"
+      "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
       "antraege": [Antrag]
     }
-[//]: # (TODO RM Datumsformat von letzteAÄnderungAm?)
 
 
 ### Partner
@@ -335,7 +334,7 @@ Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" geset
 
     {
       "teilantragsnummer": String
-      "letzteAenderungAm": "YYYY-MM-DD hh:mm:ss.sss"
+      "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
       "antragstellerstatus": {
         "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN" 
       "produktanbieterstatus": {
@@ -343,7 +342,6 @@ Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" geset
       }
     }
     
-[//]: # (TODO RM Datumsformat von letzteAÄnderungAm?)
 
 ## Response Format
 
@@ -352,14 +350,10 @@ Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response ge
     { 
       "data": {
         "vorgang": {
-          "vorgangsnummer": "123456",
-          "bearbeiter": {
-            "partnerId": "11111"
-          },
-          "kundenbetreuer": {
-            "partnerId": "11111"
-          }
+         << ANGEFRAGTE FELDER >>
         }
       },
-      "errors": []
+      "errors": [
+      << EVENTUELL AUFGETRETENE FEHLER >>
+      ]
     }

@@ -67,7 +67,6 @@ wenn er nicht gesetzt ist, wird eine ID vom System generiert.
 |---------------------|---------------------------------|-------------|
 | X-TraceId           | eindeutige Id für jeden Request | sys12345678 |
 
-[//]: # (TODO RM brauchen wir das?) 
 ## Content-Type
 
 Die Schnittstelle akzeptiert Daten mit Content-Type "**application/json**".  
@@ -192,6 +191,8 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
       "antraege": [Antrag]
     }
+    
+Beachte: "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem atrag befüllt.
 
 
 ### Partner

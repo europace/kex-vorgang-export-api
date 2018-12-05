@@ -192,7 +192,7 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "antraege": [Antrag]
     }
     
-Beachte: "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem atrag befüllt.
+Beachte: "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem Antrag befüllt.
 
 
 ### Partner

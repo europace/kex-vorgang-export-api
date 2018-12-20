@@ -1,4 +1,5 @@
 # KEX-Vorgang-Export-API
+
 Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in KreditSmart.
 
 # Table of Contents
@@ -37,9 +38,7 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
 Vorgänge können über unsere GraphQL Schnittstelle via **HTTP POST** ausgelesen werden werden.  
 Die URL für das Auslesen von Vorgängen ist:
 
-[//]: # (TODO hier die richtige URL https://www.europace2.de/kreditsmart/kex/vorgang)
-
-    http://kex-vorgang-export.pku.rz-europace.local/vorgaenge
+    https://www.europace2.de/kreditsmart/kex/vorgaenge
     
 Die gewünschten Properties werden als JSON im Body des POST Requests übermittelt.  
 Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 SUCCESS**.  
@@ -78,14 +77,23 @@ Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich
 
 ## Beispiel 
 ### POST Request
-[//]: # (TODO hier die richtige URL) 
 
-    POST http://kex-vorgang-export.pku.rz-europace.local/vorgaenge
+    POST https://www.europace2.de/kreditsmart/kex/vorgaenge
     X-Authentication: xxxxxxx
     Content-Type: application/json;charset=utf-8
     
     {
-      "query": "query getVorgang($vorgangsnummer: String!) { vorgang(vorgangsnummer: $vorgangsnummer) { vorgangsnummer bearbeiter{ partnerId } kundenbetreuer{ partnerId } } }",
+      "query": "query getVorgang($vorgangsnummer: String!) {
+        vorgang(vorgangsnummer: $vorgangsnummer) {
+          vorgangsnummer
+          bearbeiter {
+            partnerId
+          }
+          kundenbetreuer {
+            partnerId
+          }
+        }
+      }",
       "variables": {
         "vorgangsnummer": "123456"
       }
@@ -112,7 +120,7 @@ Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich
 ## Fehlercodes
 
 Die Besonderheit in GraphQL ist u.a., dass die meisten Fehler nicht über HTTP-Fehlercodes wiedergegeben werden.
-In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufgetreten ist. Dafür gibt es den Parameter `errors` in der Response.
+In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufgetreten ist. Dafür gibt es das Attribut `errors` in der Response.
 
 ### HTTP-Status Errors
 
@@ -122,8 +130,9 @@ In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufget
 | 410        | Vorgang deleted | "vorgangsnummer": "123456" | Der Vorgang wurde gelöscht           |
 
 ### Validation Error
+
 Wenn die GraphQL-Query nicht verarbeitet werden kann, wird eine Response mit errorType `ValidationError` zurückgegeben.   
-Im Beispiel wurde die o.g. query ausgeführt, und das Feld vorgangsnummer falsch geschrieben (vorgangsnummerr).
+Im Beispiel wurde die o.g. query ausgeführt, aber das Feld `vorgangsnummer` falsch geschrieben (`vorgangsnummerr`).
 
     {
       "errors": [
@@ -147,8 +156,8 @@ Im Beispiel wurde die o.g. query ausgeführt, und das Feld vorgangsnummer falsch
     }
 
 
-### weitere Fehler
-Wenn der Request nicht erfolgreich verarbeitet werden konnte, liefert die Schnittstelle eine 200, aber in dem response parameter "errors" ist ein Fehler zu finden
+### Weitere Fehler
+Wenn der Request nicht erfolgreich verarbeitet werden konnte, liefert die Schnittstelle eine 200, aber in dem Attribut `errors` sind Fehlerdetails zu finden
 
     {
       "data": {},
@@ -351,10 +360,10 @@ Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response ge
     { 
       "data": {
         "vorgang": {
-         << ANGEFRAGTE FELDER >>
+          << ANGEFRAGTE FELDER >>
         }
       },
       "errors": [
-      << EVENTUELL AUFGETRETENE FEHLER >>
+        << EVENTUELL AUFGETRETENE FEHLER >>
       ]
     }

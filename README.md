@@ -49,9 +49,9 @@ Die angeforderten Daten werden ebenfalls als JSON übermittelt.
 
 Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über einen HTTP Header.
 
-| Request Header Name | Beschreibung                      |
-|---------------------|-----------------------------------|
-| X-Authentication    | API JWT der Vertriebsorganisation |
+| Request Header Name | Beschreibung                                        |
+|---------------------|-----------------------------------------------------|
+| X-Authentication    | API JWT der Vertriebsorganisation oder des Partners |
 
 
 Das API JWT (JSON Web Token) erhalten Sie von Ihrem Ansprechpartner im KreditSmart-Team. Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.

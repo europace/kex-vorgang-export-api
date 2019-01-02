@@ -26,11 +26,11 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
          * [Selbstständiger und Freiberufler](#selbstständiger-und-freiberufler)
          * [Beamter](#beamter)
          * [Arbeitgeber](#arbeitgeber)
-      * [Haushalt](#haushalt)
-         * [Antragstellerzuordnung](#antragstellerzuordnung)
-         * [Kind](#kind)
-      * [Finanzbedarf](#finanzbedarf)
-      * [Antrag](#antrag)
+   * [Haushalt](#haushalt)
+      * [Antragstellerzuordnung](#antragstellerzuordnung)
+      * [Kind](#kind)
+   * [Finanzbedarf](#finanzbedarf)
+   * [Antrag](#antrag)
 * [Response Format](#response-format)
 
 ## Allgemeines
@@ -220,7 +220,6 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
       "beschaeftigung": Beschäftigung
     }
 
-
 #### Personendaten
 
     {
@@ -234,7 +233,6 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
       "titel": [ "DOKTOR" | "PROFESSOR" ]
       "vorname": String,
     }
-	
 
 #### Wohnsituation
 
@@ -251,7 +249,6 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
 Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
 
 #### Beschäftigung
-
 
   	{ 
       "beschaeftigungsart": "ANGESTELLTER" | "ARBEITER" | "ARBEITSLOSER" | "BEAMTER" | "FREIBERUFLER" | "HAUSFRAU" | "RENTNER" | "SELBSTSTAENDIGER",
@@ -299,8 +296,7 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       "name": String
     }
 
-
-#### Haushalt
+### Haushalt
 
     {
       "kinder": [ kind ],
@@ -312,19 +308,18 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       }
     }
 
-##### Antragstellerzuordnung
+#### Antragstellerzuordnung
 
 	"ANTRAGSTELLER_1" | "ANTRAGSTELLER_2" | "BEIDE"
 
-##### Kind
+#### Kind
 
     {
       "name": String,
       "gehoertZuAntragsteller": Antragstellerzuordnung
     }	
-				
 
-#### Finanzbedarf
+### Finanzbedarf
 
     {
       "fahrzeugkauf": {
@@ -340,7 +335,7 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
 
 Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" gesetzt ist.
 
-#### Antrag
+### Antrag
 
     {
       "teilantragsnummer": String

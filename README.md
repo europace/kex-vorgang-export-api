@@ -338,12 +338,16 @@ Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" geset
 ### Antrag
 
     {
-      "teilantragsnummer": String
-      "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
+      "teilantragsnummer": String,
+      "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "antragstellerstatus": {
         "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN" 
+      },
       "produktanbieterstatus": {
         "status": "NICHT_BEARBEITET" | "UNTERSCHRIEBEN" | "ABGELEHNT" | "AUTOMATISCH_ABGELEHNT" | "ZURUECKGESTELLT" 
+      },
+      "ratenkredit": { 
+        "produktanbieterId": String 
       }
     }
     

@@ -188,11 +188,12 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
 ## Vorgang
 
     {
+      "vorgangsnummer": String,
+      "datenkontext": "ECHTGESCHAEFT", "TESTUMGEBUNG"
       "kundenbetreuer": Partner,
       "bearbeiter": Partner,
       "leadquelle": String,
-      "eigeneVorgangsnummer": String,
-      "vorgangsnummer": String,
+      "eigeneVorgangsnummer": String,      
       "antragsteller1": Antragsteller,
       "antragsteller2": Antragsteller,
       "haushalt": Haushalt,

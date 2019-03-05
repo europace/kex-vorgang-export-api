@@ -189,7 +189,7 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
 
     {
       "vorgangsnummer": String,
-      "datenkontext": "ECHTGESCHAEFT", "TESTUMGEBUNG"
+      "datenkontext": "ECHTGESCHAEFT" | "TESTUMGEBUNG",
       "kundenbetreuer": Partner,
       "bearbeiter": Partner,
       "leadquelle": String,
@@ -200,6 +200,7 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "finanzbedarf": Finanzbedarf,
       "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
       "antraege": [Antrag]
+      "vorgangsstatus": "AKTIV" | "ARCHIVIERT"
     }
     
 Beachte: "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem Antrag befüllt.

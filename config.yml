@@ -1,0 +1,38 @@
+# Schema laden und Codegenerierung für Typescript und Java
+
+# benötigte Node-Module installieren:
+# npm install -g graphql
+# npm install -g @graphql-codegen/cli
+# npm install -g @graphql-codegen/typescript
+# npm install -g @graphql-codegen/java-resolvers
+# npm install -g @graphql-codegen/schema-ast
+
+# gültiges Authentifizierungstoken eintragen
+# Codegenerierung ausführen
+# graphql-codegen --config config.yml
+
+schema:
+  - http://kex-vorgang-export.pku.rz-europace.local/vorgaenge:
+      headers:
+        X-Authentication: "..."
+documents: ./src/**/*.graphql
+generates:
+  schema.graphql:
+    - schema-ast
+  src/types.ts:
+    plugins:
+      - typescript
+  src/main/java/de/europace/privatkredit/api/Resolvers.java:
+    plugins:
+      - java-resolvers
+    config:
+      package: de.europace.privatkredit
+      scalars:
+        LocalDate: org.joda.time.LocalDate
+        LocalDateTime: org.joda.time.LocalDateTime
+        BigDecimal: java.math.BigDecimal
+
+
+
+
+

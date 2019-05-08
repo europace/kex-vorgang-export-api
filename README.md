@@ -32,6 +32,7 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
    * [Finanzbedarf](#finanzbedarf)
    * [Antrag](#antrag)
 * [Response Format](#response-format)
+* [Tools](#tools)
 
 ## Allgemeines
 
@@ -368,3 +369,14 @@ Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response ge
         << EVENTUELL AUFGETRETENE FEHLER >>
       ]
     }
+
+## Tools
+
+Das GraphQL-Schema kann man z.B. mit dem Tool [GraphiQL](https://electronjs.org/apps/graphiql) analysieren 
+und sich per Autocomplete bequem die Query zusammenbauen.
+
+
+Mithilfe von [graphql-codegen](https://graphql-code-generator.com/) oder ähnlichen Tools kann man sich aus 
+dem Schema direkt Klassen generieren. Ein Beispiel wie die Konfiguration aussehen könnte um das Schema zu laden
+und Code für Typescript und Java zu generieren, siehe [config.xml](config.yml) 
+

@@ -201,7 +201,7 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
       "antraege": [Antrag]
       "vorgangsstatus": {
-      	"status": "AKTIV" | "ARCHIVIERT"
+        "status": "AKTIV" | "ARCHIVIERT"
       }
     }
     

@@ -192,6 +192,7 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "datenkontext": "ECHTGESCHAEFT" | "TESTUMGEBUNG",
       "kundenbetreuer": Partner,
       "bearbeiter": Partner,
+      "tippgeber": Partner,      
       "leadquelle": String,
       "eigeneVorgangsnummer": String,      
       "antragsteller1": Antragsteller,

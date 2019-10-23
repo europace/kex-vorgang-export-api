@@ -199,11 +199,21 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "antragsteller2": Antragsteller,
       "haushalt": Haushalt,
       "finanzbedarf": Finanzbedarf,
-      "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
-      "antraege": [Antrag]
+      "aufbewahrung": {
+        "grund": "LEAD", "BERATERHAFTUNG", "GESCHAEFTSNACHWEIS",
+  	    "endetAm": "yyyy-MM-dd"
+      },
+      "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
+      "letztesEreignisAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
+      "prioritaet": "HOCH", "NEUTRAL", "NIEDRIG",
       "vorgangsstatus": {
         "status": "AKTIV" | "ARCHIVIERT"
+      },
+      "wiedervorlage": {
+        "kommentar": String,
+	    "wiedervorlageAm": "yyyy-MM-dd"
       }
+      "antraege": [Antrag]
     }
     
 Beachte: "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem Antrag befüllt.
@@ -344,18 +354,37 @@ Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" geset
 
     {
       "teilantragsnummer": String,
+      "produktanbieterantragsnummer": String,
+      "angenommenAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
+      "letztesEreignisAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "antragstellerstatus": {
         "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN" 
       },
       "produktanbieterstatus": {
         "status": "NICHT_BEARBEITET" | "UNTERSCHRIEBEN" | "ABGELEHNT" | "AUTOMATISCH_ABGELEHNT" | "ZURUECKGESTELLT" 
       },
+      "provisionsforderungsstatus": {
+        "status": "VOLLSTAENDIG_AUSGEZAHLT" 
+      }
+      "produkttyp": String,
+      "gesamtkonditionen": Gesamtkonditionen
       "ratenkredit": { 
-        "produktanbieterId": String 
+        "produktanbieterId": String,
+	    "produktbezeichnung": String
       }
     }
     
+### Gesamtkonditionen
+
+    {
+      "auszahlungsbetrag": BigDecimal,
+      "effektivzins": BigDecimal,
+      "laufzeitInMonaten": Int,
+      "monatlicheRate": BigDecimal,
+      "nettokreditbetrag": BigDecimal,
+      "sollzins": BigDecimal
+    }
 
 ## Response Format
 

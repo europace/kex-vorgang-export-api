@@ -2,6 +2,19 @@
 
 Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in KreditSmart.
 
+> :warning: Diese Schnittstelle wird kontinuierlich weiterentwickelt. Daher erwarten wir 
+> von allen Nutzern dieser Schnittstelle, dass sie das "Tolerant Reader Pattern" nutzen, d.h. 
+> tolerant gegenüber kompatiblen API Änderungen beim Lesen und Prozessieren der Daten sind:
+>
+> 1. unbekannte Felder dürfen keine Fehler verursachen
+>
+> 2. Strings mit eingeschränktem Wertebereich (Enums) müssen mit neuen, unbekannten Werten umgehen können
+>
+> 3. sinnvoller Umgang mit HTTP-Statuscodes die nicht explizit dokumentiert sind  
+> 
+ 
+<!-- https://opensource.zalando.com/restful-api-guidelines/#108 -->
+ 
 # Table of Contents
 
 * [Allgemeines](#allgemeines)
@@ -216,7 +229,7 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "antraege": [Antrag]
     }
     
-Beachte: "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem Antrag befüllt.
+:heavy_exclamation_mark: "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem Antrag befüllt.
 
 
 ### Partner
@@ -274,7 +287,7 @@ Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
       "selbststaendiger": Selbstständiger
     }
 
-Die befüllten Felder zur Beschäftigung sind abhängig von der Beschäftigungsart.  
+:heavy_exclamation_mark: Die befüllten Felder zur Beschäftigung sind abhängig von der Beschäftigungsart.  
 __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüllt
 
 ##### Arbeiter und Angestellter

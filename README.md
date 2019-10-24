@@ -301,7 +301,7 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
     {
       "beschaeftigungsverhaeltnis": {
         "inProbezeit": true | false,
-        "arbeitgeber": 	Arbeitgeber,
+        "arbeitgeber": Arbeitgeber,
       },
     }
 
@@ -368,12 +368,23 @@ Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" geset
         "status": "VOLLSTAENDIG_AUSGEZAHLT" 
       }
       "produkttyp": String,
-      "gesamtkonditionen": Gesamtkonditionen
-      "ratenkredit": { 
-        "produktanbieterId": String,
-	    "produktbezeichnung": String
-      }
+      "gesamtkonditionen": Gesamtkonditionen,
+      "ratenkredit": Ratenkredit
     }
+    
+Der Produkttyp kann aktuell die folgenden Werte annehmen: `RATENKREDIT`, `BAUSPARKASSE_MODERNISIERUNGSKREDIT`
+ 
+### Ratenkredit
+    
+    {
+      "produktanbieterId": String,
+      "produktbezeichnung": String,
+      "produktart": String,
+      "schlussrate": BigDecimal,
+      "vorlaufzinsenProTag": BigDecimal
+    } 
+    
+Die Produktart kann aktuell die folgenden Werte annhemen: `AUTOKREDIT`, `MODERNISIERUNGSKREDIT`, `RATENKREDIT`, `BUSINESSKREDIT`
     
 ### Gesamtkonditionen
 

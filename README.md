@@ -10,7 +10,7 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
 >
 > 2. Strings mit eingeschränktem Wertebereich (Enums) müssen mit neuen, unbekannten Werten umgehen können
 >
-> 3. sinnvoller Umgang mit HTTP-Statuscodes die nicht explizit dokumentiert sind  
+> 3. sinnvoller Umgang mit HTTP-Statuscodes, die nicht explizit dokumentiert sind  
 > 
  
 <!-- https://opensource.zalando.com/restful-api-guidelines/#108 -->

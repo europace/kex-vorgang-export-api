@@ -3,8 +3,8 @@
 Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in KreditSmart.
 
 > :warning: Diese Schnittstelle wird kontinuierlich weiterentwickelt. Daher erwarten wir 
-> von allen Nutzern dieser Schnittstelle, dass sie das "Tolerant Reader Pattern" nutzen, d.h. 
-> tolerant gegenüber kompatiblen API Änderungen beim Lesen und Prozessieren der Daten sind:
+> von allen Nutzern dieser Schnittstelle, dass sie das "[Tolerant Reader Pattern](https://martinfowler.com/bliki/TolerantReader.html)" nutzen, d.h. 
+> tolerant gegenüber kompatiblen API-Änderungen beim Lesen und Prozessieren der Daten sind:
 >
 > 1. unbekannte Felder dürfen keine Fehler verursachen
 >

@@ -430,3 +430,6 @@ Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response ge
 
 Das GraphQL-Schema kann man z.B. mit dem Tool [GraphiQL](https://electronjs.org/apps/graphiql) analysieren 
 und sich per Autocomplete bequem die Query zusammenbauen.
+
+Für [Postman](https://www.getpostman.com/) stellen wir im [Schnellstarter-Projekt](https://github.com/europace/api-schnellstart/) 
+auch eine Collection mit einem Beispiel für die "KreditSmart Vorgänge API" zur Verfügung.

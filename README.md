@@ -410,6 +410,8 @@ Die Produktart kann aktuell die folgenden Werte annhemen: `AUTOKREDIT`, `MODERNI
       "nettokreditbetrag": BigDecimal,
       "sollzins": BigDecimal
     }
+    
+Prozentwerte wie der Sollzins sind 100-basiert.
 
 ## Response Format
 

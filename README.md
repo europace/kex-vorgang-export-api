@@ -405,6 +405,7 @@ Die Produktart kann aktuell die folgenden Werte annhemen: `AUTOKREDIT`, `MODERNI
     {
       "auszahlungsbetrag": BigDecimal,
       "effektivzins": BigDecimal,
+      "gesamtkreditbetrag": BigDecimal,
       "laufzeitInMonaten": Int,
       "monatlicheRate": BigDecimal,
       "nettokreditbetrag": BigDecimal,

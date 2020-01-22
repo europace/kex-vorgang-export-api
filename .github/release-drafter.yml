@@ -1,0 +1,10 @@
+---
+version-template: '$MAJOR.$MINOR'
+name-template: '$NEXT_MINOR_VERSION'
+tag-template: 'v$NEXT_MINOR_VERSION'
+change-template: '- $TITLE (#$NUMBER)'
+template: |
+  ## What’s Changed
+
+  $CHANGES
+...

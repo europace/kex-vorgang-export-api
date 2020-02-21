@@ -367,7 +367,7 @@ Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" geset
 ### Antrag
 
     {
-      "teilantragsnummer": String,
+      "antragsnummer": String,
       "produktanbieterantragsnummer": String,
       "angenommenAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",

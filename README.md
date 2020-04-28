@@ -61,14 +61,23 @@ Die angeforderten Daten werden ebenfalls als JSON übermittelt.
 
 ## Authentifizierung
 
-Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über einen HTTP Header.
+Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über den OAuth 2.0 Client-Credentials Flow. 
 
-| Request Header Name | Beschreibung                                        |
-|---------------------|-----------------------------------------------------|
-| X-Authentication    | API JWT der Vertriebsorganisation oder des Partners |
+| Request Header Name | Beschreibung           |
+|---------------------|------------------------|
+| Authorization       | OAuth 2.0 Bearer Token |
 
 
-Das API JWT (JSON Web Token) erhalten Sie von Ihrem Ansprechpartner im KreditSmart-Team. Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
+Das Bearer Token kann über die [Authorization-API](https://github.com/europace/authorization-api) angefordert werden. 
+Dazu wird ein Client benötigt der vorher von einer berechtigten Person über das Partnermanagement angelegt wurde, 
+eine Anleitung dafür befindet sich im [Help Center](https://europace2.zendesk.com/hc/de/articles/360012514780).
+
+Damit der Client für diese API genutzt werden kann, muss im Partnermanagement die Berechtigung **Kreditsmartvorgänge lesen** aktiviert sein.  
+ 
+Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
+
+Hat der Client nicht die benötigte Berechtigung um die Resource abzurufen, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**.
+
 
 ## TraceId zur Nachverfolgbarkeit von Requests
 

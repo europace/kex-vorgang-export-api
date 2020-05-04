@@ -46,6 +46,7 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
    * [Antrag](#antrag)
 * [Response Format](#response-format)
 * [Tools](#tools)
+* [Nutzungsbedingungen](#nutzungsbedingungen)
 
 ## Allgemeines
 
@@ -445,3 +446,6 @@ und sich per Autocomplete bequem die Query zusammenbauen.
 
 Für [Postman](https://www.getpostman.com/) stellen wir im [Schnellstarter-Projekt](https://github.com/europace/api-schnellstart/) 
 auch eine Collection mit einem Beispiel für die "KreditSmart Vorgänge API" zur Verfügung.
+
+## Nutzungsbedingungen
+Die APIs werden unter folgenden [Nutzungsbedingungen](https://developer.europace.de/terms/) zur Verfügung gestellt

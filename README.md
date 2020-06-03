@@ -39,10 +39,14 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
          * [Selbstständiger und Freiberufler](#selbstständiger-und-freiberufler)
          * [Beamter](#beamter)
          * [Arbeitgeber](#arbeitgeber)
+         * [Hausfrau und Arbeitsloser](#hausfrau-und-arbeitsloser)
+         * [Rentner](#rentner)
+      * [Herkunft](#herkunft)
    * [Haushalt](#haushalt)
       * [Antragstellerzuordnung](#antragstellerzuordnung)
       * [Kind](#kind)
    * [Finanzbedarf](#finanzbedarf)
+   * [Country](#country)
    * [Antrag](#antrag)
 * [Response Format](#response-format)
 * [Tools](#tools)
@@ -257,6 +261,7 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
       "personendaten": Personendaten,
       "wohnsituation": Wohnsituation,
       "beschaeftigung": Beschäftigung
+      "herkunft": Herkunft
     }
 
 #### Personendaten
@@ -266,6 +271,9 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
       "email": String
       "familienstand": "LEDIG" | "VERHEIRATET" | "GESCHIEDEN" | "VERWITWET" | "GETRENNT_LEBEND" | "EHEAEHNLICHE_LEBENSGEMEINSCHAFT" | "EINGETRAGENE_LEBENSPARTNERSCHAFT",
       "geburtsdatum": "YYYY-MM-DD",
+      "geburtsland": Country
+      "geburtsort": String
+      "geburtsname": String
       "nachname": String,
       "telefonGeschaeftlich": String,
       "telefonPrivat": String,
@@ -281,8 +289,12 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
         "hausnummer": String,
         "plz": String,
         "ort": String,
+        "wohnhaftSeit": "YYYY-MM-DD"
       },
       "gemeinsamerHaushalt": true | false
+      "wohnart": "ZUR_MIETE" | "ZUR_UNTERMIETE" | "IM_EIGENEN_HAUS" | "BEI_DEN_ELTERN"
+      "anzahlPkw": Integer
+      "anzahlPersonenImHaushalt": Integer
     }
 
 Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
@@ -296,6 +308,9 @@ Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
       "beamter": Beamter,
       "freiberufler": Freiberufler,
       "selbststaendiger": Selbstständiger
+      "rentner": Rentner
+      "hausfrau": Hausfrau
+      "arbeitsloser" : Arbeitsloser
     }
 
 :heavy_exclamation_mark: Die befüllten Felder zur Beschäftigung sind abhängig von der Beschäftigungsart.  
@@ -309,6 +324,8 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
         "befristung": "BEFRISTET" | "UNBEFRISTET",
         "befristetBis": "YYYY-MM-DD",
         "inProbezeit": true | false
+        "beschaeftigtSeit": "YYYY-MM-DD"
+        "nettoeinkommenMonatlich": "YYYY-MM-DD"
       }
     }
 
@@ -318,6 +335,8 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       "firma": {
         "name": String
       }
+      "selbststaendigSeit": "YYYY-MM-DD"
+      "bruttoEinkommenLaufendesJahr": BigDecimal
     }
 
 ##### Beamter
@@ -326,7 +345,22 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       "beschaeftigungsverhaeltnis": {
         "inProbezeit": true | false,
         "arbeitgeber": Arbeitgeber,
+        "verbeamtetSeit": "YYYY-MM-DD"
+        "nettoeinkommenMonatlich": BigDecimal
       },
+    }
+
+##### Hausfrau und Arbeitsloser
+
+    {
+      "sonstigesEinkommenMonatlich": BigDecimal
+    }
+
+##### Rentner
+
+    {
+      "rentnerSeit": "YYYY-MM-DD"
+      "staatlicheRenteMonatlich": BigDecimal
     }
 
 ##### Arbeitgeber
@@ -334,6 +368,22 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
     {
       "name": String
     }
+    
+#### Herkunft
+
+    {
+      "staatsangehoerigkeit": Country
+      "steuerId": String
+      "inDeutschlandSeit": "YYYY-MM-DD"
+      "aufenthaltstitel": Aufenthaltstitel
+      "aufenthaltBefristetBis": "YYYY-MM-DD"
+      "arbeitserlaubnisVorhanden": true | false
+    }
+    
+##### Aufenthaltstitel
+
+    "VISUM" | "AUFENTHALTSERLAUBNIS" | "NIEDERLASSUNGSERLAUBNIS" | "ERLAUBNIS_ZUM_DAUERAUFENTHALT_EU"
+
 
 ### Haushalt
 
@@ -365,7 +415,7 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
         "kaufpreis": Decimal,
       }
       "finanzierungszweck": "UMSCHULDUNG" | "FAHRZEUGKAUF" | "MODERNISIEREN" | "FREIE_VERWENDUNG",
-      "finanzierungswunsch": 			{
+      "finanzierungswunsch": {
         "laufzeitInMonaten": Integer,
         "kreditbetrag": Decimal,
         "rateMonatlich": Decimal
@@ -373,6 +423,12 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
     }
 
 Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" gesetzt ist.
+
+### Country
+
+    Die Übermittlung erfolgt im Format [ISO-3166/ALPHA-2](https://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste)
+    
+    Zusätzlich gibt es den Wert "SONSTIGE"
 
 ### Antrag
 

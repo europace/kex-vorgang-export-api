@@ -43,8 +43,10 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
          * [Rentner](#rentner)
       * [Herkunft](#herkunft)
    * [Haushalt](#haushalt)
-      * [Antragstellerzuordnung](#antragstellerzuordnung)
+      * [Antragstellerzugehoerigkeit](#antragstellerzugehoerigkeit)
       * [Kind](#kind)
+      * [Verbindlichkeiten](#verbindlichkeiten)
+        * [RatenkreditVerbindlichkeit](#ratenkreditVerbindlichkeit)
    * [Finanzbedarf](#finanzbedarf)
    * [Country](#country)
    * [Antrag](#antrag)
@@ -388,16 +390,17 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
 ### Haushalt
 
     {
-      "kinder": [ kind ],
+      "kinder": [ Kind ],
       "kontoverbindung": {
         "iban": String,
         "bic": String,
         "kreditinstitut": String,
-        "gehoertZuAntragsteller": Antragstellerzuordnung
+        "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
       }
+      verbindlichkeiten : Verbindlichkeiten
     }
 
-#### Antragstellerzuordnung
+#### Antragstellerzugehoerigkeit
 
 	"ANTRAGSTELLER_1" | "ANTRAGSTELLER_2" | "BEIDE"
 
@@ -405,8 +408,29 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
 
     {
       "name": String,
-      "gehoertZuAntragsteller": Antragstellerzuordnung
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }	
+    
+#### Verbindlichkeiten
+    {
+      "ratenkredite" : [RatenkreditVerbindlichkeit]
+    }
+    
+##### RatenkreditVerbindlichkeit
+
+    {
+      "rateMonatlich": BigDecimal
+      "schlussrate": BigDecimal
+      "datumLetzteRate": "YYYY-MM-DD"
+      "restschuld": BigDecimal
+      "urspruenglicherKreditbetrag": BigDecimal
+      "datumErsteZahlung": "YYYY-MM-DD"
+      "abloesen": Boolean
+      "iban": String
+      "kreditinstitut": String
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+      "glaeubiger": String
+    }
 
 ### Finanzbedarf
 

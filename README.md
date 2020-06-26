@@ -439,13 +439,13 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
 
     {
       "fahrzeugkauf": {
-        "kaufpreis": Decimal,
+        "kaufpreis": BigDecimal,
       }
       "finanzierungszweck": "UMSCHULDUNG" | "FAHRZEUGKAUF" | "MODERNISIEREN" | "FREIE_VERWENDUNG",
       "finanzierungswunsch": {
         "laufzeitInMonaten": Integer,
-        "kreditbetrag": Decimal,
-        "rateMonatlich": Decimal
+        "kreditbetrag": BigDecimal,
+        "rateMonatlich": BigDecimal
       }
     }
 

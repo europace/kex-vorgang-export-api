@@ -497,7 +497,7 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
     {
       "versicherteRisikenAntragsteller1": [ VersichertesRisiko ]
       "versicherteRisikenAntragsteller2": [ VersichertesRisiko ]
-      "praemieMonatlich": Decimal
+      "praemieMonatlich": BigDecimal
     }
     
 Der Produkttyp kann aktuell die folgenden Werte annehmen: `RATENKREDIT`, `BAUSPARKASSE_MODERNISIERUNGSKREDIT`

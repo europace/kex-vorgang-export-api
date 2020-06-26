@@ -49,7 +49,10 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
         * [RatenkreditVerbindlichkeit](#ratenkreditVerbindlichkeit)
    * [Finanzbedarf](#finanzbedarf)
    * [Country](#country)
+   * [VersichertesRisiko](#versichertesRisiko)
    * [Antrag](#antrag)
+     * [BenoetigteUnterlage](benoetigteUnterlage)
+     * [Ratenschutz](ratenschutz)
 * [Response Format](#response-format)
 * [Tools](#tools)
 * [Nutzungsbedingungen](#nutzungsbedingungen)
@@ -453,6 +456,10 @@ Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" geset
     Die Übermittlung erfolgt im Format [ISO-3166/ALPHA-2](https://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste)
     
     Zusätzlich gibt es den Wert "SONSTIGE"
+    
+### VersichertesRisiko
+
+Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
 
 ### Antrag
 
@@ -466,14 +473,31 @@ Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" geset
         "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN" 
       },
       "produktanbieterstatus": {
-        "status": "NICHT_BEARBEITET" | "UNTERSCHRIEBEN" | "ABGELEHNT" | "AUTOMATISCH_ABGELEHNT" | "ZURUECKGESTELLT" 
+        "status": "NICHT_BEARBEITET" | "UNTERSCHRIEBEN" | "ABGELEHNT" | "AUTOMATISCH_ABGELEHNT" | "ZURUECKGESTELLT"
+        "kommentar": String
       },
       "provisionsforderungsstatus": {
         "status": "VOLLSTAENDIG_AUSGEZAHLT" 
       }
       "produkttyp": String,
+      "ratenschutz": Ratenschutz,
       "gesamtkonditionen": Gesamtkonditionen,
       "ratenkredit": Ratenkredit
+      "benoetigteUnterlagen" : [BenoetigteUnterlage]
+    }
+
+#### BenoetigteUnterlage
+
+    {
+      "unterlage": String
+    }
+
+#### Ratenschutz 
+
+    {
+      "versicherteRisikenAntragsteller1": [ VersichertesRisiko ]
+      "versicherteRisikenAntragsteller2": [ VersichertesRisiko ]
+      "praemieMonatlich": BigDecimal
     }
     
 Der Produkttyp kann aktuell die folgenden Werte annehmen: `RATENKREDIT`, `BAUSPARKASSE_MODERNISIERUNGSKREDIT`

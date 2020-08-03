@@ -1,3 +1,4 @@
+
 # KEX-Vorgang-Export-API
 
 Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in KreditSmart.
@@ -59,7 +60,7 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
 
 ## Allgemeines
 
-Vorgänge können über unsere GraphQL Schnittstelle via **HTTP POST** ausgelesen werden werden.  
+Vorgänge können über unsere GraphQL Schnittstelle via **HTTP POST** ausgelesen werden.  
 Die URL für das Auslesen von Vorgängen ist:
 
     https://www.europace2.de/kreditsmart/kex/vorgaenge
@@ -470,14 +471,17 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
       "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "letztesEreignisAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "antragstellerstatus": {
-        "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN" 
+        "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN", 
+        "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
       },
       "produktanbieterstatus": {
-        "status": "NICHT_BEARBEITET" | "UNTERSCHRIEBEN" | "ABGELEHNT" | "AUTOMATISCH_ABGELEHNT" | "ZURUECKGESTELLT"
+        "status": "NICHT_BEARBEITET" | "UNTERSCHRIEBEN" | "ABGELEHNT" | "AUTOMATISCH_ABGELEHNT" | "ZURUECKGESTELLT",
+        "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
         "kommentar": String
       },
       "provisionsforderungsstatus": {
-        "status": "VOLLSTAENDIG_AUSGEZAHLT" 
+        "status": "VOLLSTAENDIG_AUSGEZAHLT", 
+        "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
       }
       "produkttyp": String,
       "ratenschutz": Ratenschutz,

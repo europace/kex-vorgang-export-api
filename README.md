@@ -3,8 +3,8 @@
 
 Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in KreditSmart.
 
-> :warning: Diese Schnittstelle wird kontinuierlich weiterentwickelt. Daher erwarten wir 
-> von allen Nutzern dieser Schnittstelle, dass sie das "[Tolerant Reader Pattern](https://martinfowler.com/bliki/TolerantReader.html)" nutzen, d.h. 
+> :warning: Diese Schnittstelle wird kontinuierlich weiterentwickelt. Daher erwarten wir
+> von allen Nutzern dieser Schnittstelle, dass sie das "[Tolerant Reader Pattern](https://martinfowler.com/bliki/TolerantReader.html)" nutzen, d.h.
 > tolerant gegenüber kompatiblen API-Änderungen beim Lesen und Prozessieren der Daten sind:
 >
 > 1. unbekannte Felder dürfen keine Fehler verursachen
@@ -12,10 +12,10 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
 > 2. Strings mit eingeschränktem Wertebereich (Enums) müssen mit neuen, unbekannten Werten umgehen können
 >
 > 3. sinnvoller Umgang mit HTTP-Statuscodes, die nicht explizit dokumentiert sind  
-> 
- 
+>
+
 <!-- https://opensource.zalando.com/restful-api-guidelines/#108 -->
- 
+
 # Table of Contents
 
 * [Allgemeines](#allgemeines)
@@ -64,7 +64,7 @@ Vorgänge können über unsere GraphQL Schnittstelle via **HTTP POST** ausgelese
 Die URL für das Auslesen von Vorgängen ist:
 
     https://www.europace2.de/kreditsmart/kex/vorgaenge
-    
+
 Die gewünschten Properties werden als JSON im Body des POST Requests übermittelt.  
 Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 SUCCESS**.  
 Die angeforderten Daten werden ebenfalls als JSON übermittelt.
@@ -72,19 +72,19 @@ Die angeforderten Daten werden ebenfalls als JSON übermittelt.
 
 ## Authentifizierung
 
-Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über den OAuth 2.0 Client-Credentials Flow. 
+Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über den OAuth 2.0 Client-Credentials Flow.
 
 | Request Header Name | Beschreibung           |
 |---------------------|------------------------|
 | Authorization       | OAuth 2.0 Bearer Token |
 
 
-Das Bearer Token kann über die [Authorization-API](https://github.com/europace/authorization-api) angefordert werden. 
-Dazu wird ein Client benötigt der vorher von einer berechtigten Person über das Partnermanagement angelegt wurde, 
+Das Bearer Token kann über die [Authorization-API](https://github.com/europace/authorization-api) angefordert werden.
+Dazu wird ein Client benötigt der vorher von einer berechtigten Person über das Partnermanagement angelegt wurde,
 eine Anleitung dafür befindet sich im [Help Center](https://europace2.zendesk.com/hc/de/articles/360012514780).
 
 Damit der Client für diese API genutzt werden kann, muss im Partnermanagement die Berechtigung **Kreditsmartvorgänge lesen** aktiviert sein.  
- 
+
 Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
 
 Hat der Client nicht die benötigte Berechtigung um die Resource abzurufen, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**.
@@ -109,13 +109,13 @@ Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich
 |---------------------|------------------|
 | Content-Type        | application/json |
 
-## Beispiel 
+## Beispiel
 ### POST Request
 
     POST https://www.europace2.de/kreditsmart/kex/vorgaenge
     X-Authentication: xxxxxxx
     Content-Type: application/json;charset=utf-8
-    
+
     {
       "query": "query getVorgang($vorgangsnummer: String!) {
         vorgang(vorgangsnummer: $vorgangsnummer) {
@@ -132,7 +132,7 @@ Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich
         "vorgangsnummer": "123456"
       }
     }
-    
+
 ### POST Response
 
     {
@@ -249,7 +249,7 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       }
       "antraege": [Antrag]
     }
-    
+
 :heavy_exclamation_mark: "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem Antrag befüllt.
 
 
@@ -259,7 +259,7 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "partnerId": String
     }
 
-Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12. 
+Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
 
 ### Antragsteller
 
@@ -307,7 +307,7 @@ Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
 
 #### Beschäftigung
 
-  	{ 
+  	{
       "beschaeftigungsart": "ANGESTELLTER" | "ARBEITER" | "ARBEITSLOSER" | "BEAMTER" | "FREIBERUFLER" | "HAUSFRAU" | "RENTNER" | "SELBSTSTAENDIGER",
       "angestellter": Angestellter,				
       "arbeiter": Arbeiter,
@@ -370,11 +370,11 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
     }
 
 ##### Arbeitgeber
-  
+
     {
       "name": String
     }
-    
+
 #### Herkunft
 
     {
@@ -385,7 +385,7 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       "aufenthaltBefristetBis": "YYYY-MM-DD"
       "arbeitserlaubnisVorhanden": true | false
     }
-    
+
 ##### Aufenthaltstitel
 
     "VISUM" | "AUFENTHALTSERLAUBNIS" | "NIEDERLASSUNGSERLAUBNIS" | "ERLAUBNIS_ZUM_DAUERAUFENTHALT_EU"
@@ -413,13 +413,13 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
     {
       "name": String,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
-    }	
-    
+    }
+
 #### Verbindlichkeiten
     {
       "ratenkredite" : [RatenkreditVerbindlichkeit]
     }
-    
+
 ##### RatenkreditVerbindlichkeit
 
     {
@@ -455,9 +455,9 @@ Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" geset
 ### Country
 
     Die Übermittlung erfolgt im Format [ISO-3166/ALPHA-2](https://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste)
-    
+
     Zusätzlich gibt es den Wert "SONSTIGE"
-    
+
 ### VersichertesRisiko
 
 Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
@@ -471,7 +471,7 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
       "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "letztesEreignisAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "antragstellerstatus": {
-        "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN", 
+        "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN",
         "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
       },
       "produktanbieterstatus": {
@@ -480,7 +480,7 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
         "kommentar": String
       },
       "provisionsforderungsstatus": {
-        "status": "VOLLSTAENDIG_AUSGEZAHLT", 
+        "status": "VOLLSTAENDIG_AUSGEZAHLT",
         "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
       }
       "produkttyp": String,
@@ -496,28 +496,28 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
       "unterlage": String
     }
 
-#### Ratenschutz 
+#### Ratenschutz
 
     {
       "versicherteRisikenAntragsteller1": [ VersichertesRisiko ]
       "versicherteRisikenAntragsteller2": [ VersichertesRisiko ]
       "praemieMonatlich": BigDecimal
     }
-    
+
 Der Produkttyp kann aktuell die folgenden Werte annehmen: `RATENKREDIT`, `BAUSPARKASSE_MODERNISIERUNGSKREDIT`
- 
+
 ### Ratenkredit
-    
+
     {
       "produktanbieterId": String,
       "produktbezeichnung": String,
       "produktart": String,
       "schlussrate": BigDecimal,
       "vorlaufzinsenProTag": BigDecimal
-    } 
-    
+    }
+
 Die Produktart kann aktuell die folgenden Werte annhemen: `AUTOKREDIT`, `MODERNISIERUNGSKREDIT`, `RATENKREDIT`, `BUSINESSKREDIT`
-    
+
 ### Gesamtkonditionen
 
     {
@@ -529,14 +529,14 @@ Die Produktart kann aktuell die folgenden Werte annhemen: `AUTOKREDIT`, `MODERNI
       "nettokreditbetrag": BigDecimal,
       "sollzins": BigDecimal
     }
-    
+
 Prozentwerte wie der Sollzins sind 100-basiert.
 
 ## Response Format
 
 Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response gesendet. Nicht befüllte Felder werden nicht zurückgegeben.
 
-    { 
+    {
       "data": {
         "vorgang": {
           << ANGEFRAGTE FELDER >>
@@ -549,11 +549,11 @@ Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response ge
 
 ## Tools
 
-Das GraphQL-Schema kann man z.B. mit dem Tool [GraphiQL](https://electronjs.org/apps/graphiql) analysieren 
+Das GraphQL-Schema kann man z.B. mit dem Tool [GraphiQL](https://electronjs.org/apps/graphiql) analysieren
 und sich per Autocomplete bequem die Query zusammenbauen.
 
-Für [Postman](https://www.getpostman.com/) stellen wir im [Schnellstarter-Projekt](https://github.com/europace/api-schnellstart/) 
+Für [Postman](https://www.getpostman.com/) stellen wir im [Schnellstarter-Projekt](https://github.com/europace/api-schnellstart/)
 auch eine Collection mit einem Beispiel für die "KreditSmart Vorgänge API" zur Verfügung.
 
 ## Nutzungsbedingungen
-Die APIs werden unter folgenden [Nutzungsbedingungen](https://developer.europace.de/terms/) zur Verfügung gestellt
+Die APIs werden unter folgenden [Nutzungsbedingungen](https://docs.api.europace.de/nutzungsbedingungen/) zur Verfügung gestellt

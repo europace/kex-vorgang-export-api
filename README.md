@@ -28,6 +28,7 @@ Alle hier dokumentierten Schnittstellen sind [GraphQL-Schnittstellen](https://do
    * [POST Response](#post-response)
 * [Fehlercodes](#fehlercodes)
    * [HTTP-Status Errors](#http-status-errors)
+   * [GraphQL Fehler](#graphql-fehler)
 * [Request Format](#request-format)
 * [Vorgang](#vorgang)
    * [Partner](#partner)

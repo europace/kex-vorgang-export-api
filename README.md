@@ -1,7 +1,8 @@
 
 # KEX-Vorgang-Export-API
 
-Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in KreditSmart.
+Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in KreditSmart.  
+Alle hier dokumentierten Schnittstellen sind [GraphQL-Schnittstellen](https://docs.api.europace.de/privatkredit/graphql/).
 
 > :warning: Diese Schnittstelle wird kontinuierlich weiterentwickelt. Daher erwarten wir
 > von allen Nutzern dieser Schnittstelle, dass sie das "[Tolerant Reader Pattern](https://martinfowler.com/bliki/TolerantReader.html)" nutzen, d.h.
@@ -27,8 +28,6 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
    * [POST Response](#post-response)
 * [Fehlercodes](#fehlercodes)
    * [HTTP-Status Errors](#http-status-errors)
-   * [Validation Error](#validation-error)
-   * [weitere Fehler](#weitere-fehler)
 * [Request Format](#request-format)
 * [Vorgang](#vorgang)
    * [Partner](#partner)
@@ -60,7 +59,7 @@ Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in Kred
 
 ## Allgemeines
 
-Vorgänge können über unsere GraphQL Schnittstelle via **HTTP POST** ausgelesen werden.  
+Vorgänge können über unsere [GraphQL Schnittstelle](https://docs.api.europace.de/privatkredit/graphql/#allgemeines) via **HTTP POST** ausgelesen werden.  
 Die URL für das Auslesen von Vorgängen ist:
 
     https://www.europace2.de/kreditsmart/kex/vorgaenge
@@ -155,6 +154,7 @@ Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich
 
 Die Besonderheit in GraphQL ist u.a., dass die meisten Fehler nicht über HTTP-Fehlercodes wiedergegeben werden.
 In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufgetreten ist. Dafür gibt es das Attribut `errors` in der Response.
+Weitere Infos gibt es [hier](https://docs.api.europace.de/privatkredit/graphql/)
 
 ### HTTP-Status Errors
 
@@ -163,45 +163,7 @@ In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufget
 | 401        | Unauthorized    | -                          | Authentifizierung ist fehlgeschlagen |
 | 410        | Vorgang deleted | "vorgangsnummer": "123456" | Der Vorgang wurde gelöscht           |
 
-### Validation Error
-
-Wenn die GraphQL-Query nicht verarbeitet werden kann, wird eine Response mit errorType `ValidationError` zurückgegeben.   
-Im Beispiel wurde die o.g. query ausgeführt, aber das Feld `vorgangsnummer` falsch geschrieben (`vorgangsnummerr`).
-
-    {
-      "errors": [
-        {
-          "message": "Validation error of type FieldUndefined: Field 'vorgangsnummerr' in type 'Vorgang' is undefined @ 'vorgang/vorgangsnummerr'",
-          "locations": [
-            {
-              "line": 1,
-              "column": 89
-            }
-          ],
-          "description": "Field 'vorgangsnummerr' in type 'Vorgang' is undefined",
-          "validationErrorType": "FieldUndefined",
-          "queryPath": [
-            "vorgang",
-            "vorgangsnummerr"
-          ],
-          "errorType": "ValidationError"
-        }
-      ]
-    }
-
-
-### Weitere Fehler
-Wenn der Request nicht erfolgreich verarbeitet werden konnte, liefert die Schnittstelle eine 200, aber in dem Attribut `errors` sind Fehlerdetails zu finden
-
-    {
-      "data": {},
-      "errors": [
-        {
-          "message": MESSAGE,
-          "status": STATUS_CODE
-        }
-      ]
-    }
+### GraphQL Fehler
 
 | Fehlercode | Nachricht                  | Erklärung                                                                                      |
 |------------|----------------------------|------------------------------------------------------------------------------------------------|
@@ -549,11 +511,9 @@ Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response ge
 
 ## Tools
 
-Das GraphQL-Schema kann man z.B. mit dem Tool [GraphiQL](https://electronjs.org/apps/graphiql) analysieren
-und sich per Autocomplete bequem die Query zusammenbauen.
-
+Es gibt verschiedene [Tools](https://docs.api.europace.de/privatkredit/graphql/) für GraphQL.
 Für [Postman](https://www.getpostman.com/) stellen wir im [Schnellstarter-Projekt](https://github.com/europace/api-schnellstart/)
-auch eine Collection mit einem Beispiel für die "KreditSmart Vorgänge API" zur Verfügung.
+auch eine Collection mit einem Beispiel für die "KreditSmart Vorgänge API" zur Verfügung, wenn man keinen GraphQL-Client verwenden möchte.
 
 ## Nutzungsbedingungen
 Die APIs werden unter folgenden [Nutzungsbedingungen](https://docs.api.europace.de/nutzungsbedingungen/) zur Verfügung gestellt

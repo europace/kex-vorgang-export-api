@@ -79,7 +79,7 @@ Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierun
 | Authorization       | OAuth 2.0 Bearer Token |
 
 
-Das Bearer Token kann über die [Authorization-API](https://github.com/europace/authorization-api) angefordert werden.
+Das Bearer Token kann über die [Authorization-API](https://docs.api.europace.de/privatkredit/authentifizierung/) angefordert werden.
 Dazu wird ein Client benötigt der vorher von einer berechtigten Person über das Partnermanagement angelegt wurde,
 eine Anleitung dafür befindet sich im [Help Center](https://europace2.zendesk.com/hc/de/articles/360012514780).
 

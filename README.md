@@ -113,7 +113,7 @@ Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich
 ### POST Request
 
     POST https://www.europace2.de/kreditsmart/kex/vorgaenge
-    Authorization: xxxxxxx
+    Authorization: Bearer xxxxxxx
     Content-Type: application/json;charset=utf-8
 
     {

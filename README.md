@@ -294,7 +294,7 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
         "befristetBis": "YYYY-MM-DD",
         "inProbezeit": true | false
         "beschaeftigtSeit": "YYYY-MM-DD"
-        "nettoeinkommenMonatlich": "YYYY-MM-DD"
+        "nettoeinkommenMonatlich": BigDecimal
       }
     }
 

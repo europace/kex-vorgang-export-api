@@ -17,47 +17,6 @@ Alle hier dokumentierten Schnittstellen sind [GraphQL-Schnittstellen](https://do
 
 <!-- https://opensource.zalando.com/restful-api-guidelines/#108 -->
 
-# Table of Contents
-
-* [Allgemeines](#allgemeines)
-* [Authentifizierung](#authentifizierung)
-* [TraceId zur Nachverfolgbarkeit von Requests](#traceid-zur-nachverfolgbarkeit-von-requests)
-* [Content-Type](#content-type)
-* [Beispiel](#beispiel)
-   * [POST Request](#post-request)
-   * [POST Response](#post-response)
-* [Fehlercodes](#fehlercodes)
-   * [HTTP-Status Errors](#http-status-errors)
-   * [GraphQL Fehler](#graphql-fehler)
-* [Request Format](#request-format)
-* [Vorgang](#vorgang)
-   * [Partner](#partner)
-   * [Antragsteller](#antragsteller)
-      * [Personendaten](#personendaten)
-      * [Wohnsituation](#wohnsituation)
-      * [Beschäftigung](#beschäftigung)
-         * [Arbeiter und Angestellter](#arbeiter-und-angestellter)
-         * [Selbstständiger und Freiberufler](#selbstständiger-und-freiberufler)
-         * [Beamter](#beamter)
-         * [Arbeitgeber](#arbeitgeber)
-         * [Hausfrau und Arbeitsloser](#hausfrau-und-arbeitsloser)
-         * [Rentner](#rentner)
-      * [Herkunft](#herkunft)
-   * [Haushalt](#haushalt)
-      * [Antragstellerzugehoerigkeit](#antragstellerzugehoerigkeit)
-      * [Kind](#kind)
-      * [Verbindlichkeiten](#verbindlichkeiten)
-        * [RatenkreditVerbindlichkeit](#ratenkreditVerbindlichkeit)
-   * [Finanzbedarf](#finanzbedarf)
-   * [Country](#country)
-   * [VersichertesRisiko](#versichertesRisiko)
-   * [Antrag](#antrag)
-     * [BenoetigteUnterlage](benoetigteUnterlage)
-     * [Ratenschutz](ratenschutz)
-* [Response Format](#response-format)
-* [Tools](#tools)
-* [Nutzungsbedingungen](#nutzungsbedingungen)
-
 ## Allgemeines
 
 Vorgänge können über unsere [GraphQL Schnittstelle](https://docs.api.europace.de/privatkredit/graphql/#allgemeines) via **HTTP POST** ausgelesen werden.  

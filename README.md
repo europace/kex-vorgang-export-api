@@ -161,6 +161,7 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       },
       "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "letztesEreignisAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
+      "erstelltAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "prioritaet": "HOCH", "NEUTRAL", "NIEDRIG",
       "vorgangsstatus": {
         "status": "AKTIV" | "ARCHIVIERT"

@@ -393,6 +393,7 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
       "angenommenAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "letztesEreignisAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
+      "ausgehaendigtAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "antragstellerstatus": {
         "status": "BEANTRAGT" | "UNTERSCHRIEBEN" | "NICHT_ANGENOMMEN" | "WIDERRUFEN",
         "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"

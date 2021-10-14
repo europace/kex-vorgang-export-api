@@ -412,6 +412,7 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
       "gesamtkonditionen": Gesamtkonditionen,
       "ratenkredit": Ratenkredit
       "benoetigteUnterlagen" : [BenoetigteUnterlage]
+      "dokumente" : [Dokument]
     }
 
 #### BenoetigteUnterlage
@@ -455,6 +456,13 @@ Die Produktart kann aktuell die folgenden Werte annhemen: `AUTOKREDIT`, `MODERNI
     }
 
 Prozentwerte wie der Sollzins sind 100-basiert.
+
+### Dokument
+
+    {
+      "url": String
+      "name": String
+    }
 
 ## Response Format
 

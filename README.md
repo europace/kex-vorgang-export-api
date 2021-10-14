@@ -459,7 +459,7 @@ Prozentwerte wie der Sollzins sind 100-basiert.
 
     {
       "url": String
-      "title": String
+      "name": String
     }
 
 ## Response Format

@@ -173,7 +173,7 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "antraege": [Antrag]
     }
 
-:heavy_exclamation_mark: "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem Antrag befüllt.
+> "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem Antrag befüllt.
 
 
 ### Partner
@@ -242,7 +242,7 @@ Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
       "arbeitsloser" : Arbeitsloser
     }
 
-:heavy_exclamation_mark: Die befüllten Felder zur Beschäftigung sind abhängig von der Beschäftigungsart.  
+> Die befüllten Felder zur Beschäftigung sind abhängig von der Beschäftigungsart.  
 __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüllt
 
 ##### Arbeiter und Angestellter
@@ -406,14 +406,16 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
       "provisionsforderungsstatus": {
         "status": "VOLLSTAENDIG_AUSGEZAHLT",
         "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
-      }
+      },
       "produkttyp": String,
       "ratenschutz": Ratenschutz,
       "gesamtkonditionen": Gesamtkonditionen,
-      "ratenkredit": Ratenkredit
-      "benoetigteUnterlagen" : [BenoetigteUnterlage]
+      "ratenkredit": Ratenkredit,
+      "benoetigteUnterlagen" : [BenoetigteUnterlage],
       "dokumente" : [Dokument]
     }
+    
+> `ausgehaendigtAm` zeigt NUR die letzte/jüngsten Aushändigung des Antrags an.
 
 #### BenoetigteUnterlage
 
@@ -460,7 +462,7 @@ Prozentwerte wie der Sollzins sind 100-basiert.
 ### Dokument
 
     {
-      "url": String
+      "url": String,
       "name": String
     }
 

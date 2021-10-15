@@ -406,14 +406,16 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
       "provisionsforderungsstatus": {
         "status": "VOLLSTAENDIG_AUSGEZAHLT",
         "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS"
-      }
+      },
       "produkttyp": String,
       "ratenschutz": Ratenschutz,
       "gesamtkonditionen": Gesamtkonditionen,
-      "ratenkredit": Ratenkredit
-      "benoetigteUnterlagen" : [BenoetigteUnterlage]
+      "ratenkredit": Ratenkredit,
+      "benoetigteUnterlagen" : [BenoetigteUnterlage],
       "dokumente" : [Dokument]
     }
+    
+:heavy_exclamation_mark: "ausgehaendigtAm" zeigt NUR die letzte/jüngsten Aushändigung des Antrags an.
 
 #### BenoetigteUnterlage
 
@@ -460,7 +462,7 @@ Prozentwerte wie der Sollzins sind 100-basiert.
 ### Dokument
 
     {
-      "url": String
+      "url": String,
       "name": String
     }
 

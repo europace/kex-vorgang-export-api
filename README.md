@@ -412,7 +412,9 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
       "gesamtkonditionen": Gesamtkonditionen,
       "ratenkredit": Ratenkredit,
       "benoetigteUnterlagen" : [BenoetigteUnterlage],
-      "dokumente" : [Dokument]
+      "dokumente" : [Dokument],
+      "identifikationAntragsteller1" : Identifikation,
+      "identifikationAntragsteller2" : Identifikation
     }
     
 > `ausgehaendigtAm` zeigt NUR die letzte/jüngsten Aushändigung des Antrags an.
@@ -465,6 +467,18 @@ Prozentwerte wie der Sollzins sind 100-basiert.
       "url": String,
       "name": String
     }
+    
+### Identifikation
+    {
+      antragstellername: String 
+      qesUrl: String
+      referenznummer: String
+      videolegitimationUrl: String
+    }
+    
+Das Property `antragstellername` enthält den Namen im Format “\<vorname\> \<nachname\>”.
+
+
 
 ## Response Format
 

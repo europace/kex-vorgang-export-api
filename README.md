@@ -28,7 +28,7 @@ To use these APIs your OAuth2-Client needs the following Scopes:
 
 | Scope                      | Label in Partnermanagement | Description                         |
 |----------------------------|----------------------------|-------------------------------------|
-| privatkredit:vorgang:lesel | KreditSmart-Vorgänge lesen | Scope for reading data of a Vorgang |
+| privatkredit:vorgang:lesen | KreditSmart-Vorgänge lesen | Scope for reading data of a Vorgang |
 
 ### GraphQL-Requests
 
@@ -269,7 +269,7 @@ The value of `gemeinsamerHaushalt` is only relevant for the second Antragsteller
       "arbeitsloser" : Arbeitsloser
     }
 
-The `beschaeftigungsart` determines which data is availabble. For example the `beschaeftigungsart=ARBEITER` means that all data of field `arbeiter` is available. All other fields will be empty.
+The `beschaeftigungsart` determines which data is available. For example the `beschaeftigungsart=ARBEITER` means that all data of field `arbeiter` is available. All other fields will be empty.
 
 ###### Arbeiter and Angestellter
 

@@ -1,75 +1,81 @@
-
 # KEX-Vorgang-Export-API
+> ⚠️ You'll find German domain-specific terms in the documentation, for translations and further explanations please refer to our [glossary](https://docs.api.europace.de/common/glossary/)
 
-Die Schnittstelle ermöglicht das automatisierte Auslesen von Vorgängen in KreditSmart.  
-Alle hier dokumentierten Schnittstellen sind [GraphQL-Schnittstellen](https://docs.api.europace.de/privatkredit/graphql/).
+## General
 
-> ⚠️ Diese Schnittstelle wird kontinuierlich weiterentwickelt. Daher erwarten wir
-> von allen Nutzern dieser Schnittstelle, dass sie das "[Tolerant Reader Pattern](https://martinfowler.com/bliki/TolerantReader.html)" nutzen, d.h.
-> tolerant gegenüber kompatiblen API-Änderungen beim Lesen und Prozessieren der Daten sind:
+An API to read data of KreditSmart Vorgänge.  
+All APIs documented here are [GraphQL-APIs](https://docs.api.europace.de/privatkredit/graphql/).
+
+    https://www.europace2.de/kreditsmart/kex/vorgaenge
+
+> ⚠️ This API is continuously developed. Therefore we expect
+> all users to align with the "[Tolerant Reader Pattern](https://martinfowler.com/bliki/TolerantReader.html)", which requires clients to be
+> tolerant towards compatible API-Changes when reading and processing the data. This means:
 >
-> 1. unbekannte Felder dürfen keine Fehler verursachen
+> 1. unknown properties must not result in errors
 >
-> 2. Strings mit eingeschränktem Wertebereich (Enums) müssen mit neuen, unbekannten Werten umgehen können
+> 2. Strings with a restricted set of values (Enums) must support new unknown values
 >
-> 3. sinnvoller Umgang mit HTTP-Statuscodes, die nicht explizit dokumentiert sind  
+> 3. sensible usage of HTTP-Statuscodes, even if they are not explicitly documented
 >
 
 <!-- https://opensource.zalando.com/restful-api-guidelines/#108 -->
 
-## Allgemeines
+### Authentication
 
-Vorgänge können über unsere [GraphQL Schnittstelle](https://docs.api.europace.de/privatkredit/graphql/#allgemeines) via **HTTP POST** ausgelesen werden.  
-Die URL für das Auslesen von Vorgängen ist:
+These APIs are secured by the OAuth client credentials flow using the [Authorization-API](https://docs.api.europace.de/privatkredit/authentifizierung/).
+To use these APIs your OAuth2-Client needs the following Scopes:
 
-    https://www.europace2.de/kreditsmart/kex/vorgaenge
+| Scope                      | Label in Partnermanagement | Description                         |
+|----------------------------|----------------------------|-------------------------------------|
+| privatkredit:vorgang:lesen | KreditSmart-Vorgänge lesen | Scope for reading data of a Vorgang |
 
-Die gewünschten Properties werden als JSON im Body des POST Requests übermittelt.  
-Ein erfolgreicher Aufruf resultiert in einer Response mit dem HTTP Statuscode **200 SUCCESS**.  
-Die angeforderten Daten werden ebenfalls als JSON übermittelt.
+### GraphQL-Requests
 
+These APIs accept data with the Content-Type "**application/json**" with UTF-8 encoding.
+The fields inside a block can be sent in any order.
 
-## Authentifizierung
+The APIs support all common GraphQL formats. More information can be found at [https://graphql.org/learn/queries/](https://graphql.org/learn/queries/).
 
-Für jeden Request ist eine Authentifizierung erforderlich. Die Authentifizierung erfolgt über den OAuth 2.0 Client-Credentials Flow.
+The body of a GraphQL request contains the field `query`, which includes the GraphQL query as a String. Parameters can be set directly in the query or defined as variables. The variables can be sent in the `variables` field of the body as a key-value-map.
+All our examples use variables.
 
-| Request Header Name | Beschreibung           |
-|---------------------|------------------------|
-| Authorization       | OAuth 2.0 Bearer Token |
+    {
+      "query": "...",
+      "variables": { ... }
+    }
 
+### Error Codes
 
-Das Bearer Token kann über die [Authorization-API](https://docs.api.europace.de/privatkredit/authentifizierung/) angefordert werden.
-Dazu wird ein Client benötigt der vorher von einer berechtigten Person über das Partnermanagement angelegt wurde,
-eine Anleitung dafür befindet sich im [Help Center](https://europace2.zendesk.com/hc/de/articles/360012514780).
+One of the special features in GraphQL is that most errors are not reflected via HTTP error codes.
+In many cases you receive a status code 200, even though an error has occurred. These GraphQL errors can be found in the `errors` field of the response body.
+More information about error codes can be found [here](https://docs.api.europace.de/privatkredit/graphql/#error-handling).
 
-Damit der Client für diese API genutzt werden kann, muss im Partnermanagement die Berechtigung **KreditSmart-Vorgänge lesen** (Scope `privatkredit:vorgang:lesen`) aktiviert sein.  
+### HTTP-Status Errors
 
-Schlägt die Authentifizierung fehl, erhält der Aufrufer eine HTTP Response mit Statuscode **401 UNAUTHORIZED**.
+| Error Code | Message               | Description                     |
+|------------|-----------------------|---------------------------------|
+| 401        | Unauthorized          | Authentication failed           |
+| 403        | Forbidden             | The API client misses a scope   |
+| 415        | Unsupported MediaType | The wrong content type was used |
 
-Hat der Client nicht die benötigte Berechtigung um die Resource abzurufen, erhält der Aufrufer eine HTTP Response mit Statuscode **403 FORBIDDEN**.
+#### GraphQL Errors
 
+| Error Code | Message     | Further attributes         | Description                                                                                    |
+|------------|-------------|----------------------------|------------------------------------------------------------------------------------------------|
+| 400        | Bad Request | -                          | Request format is invalid (mandatory fields are missing, wrong parameter names or values, ...) |
+| 403        | Forbidden   | -                          | The authenticated user does not have sufficient rights to read the Vorgang                     |
+| 410        | Gone        | "vorgangsnummer": "123456" | The Vorgang was deleted in the meantime                                                        |
 
-## TraceId zur Nachverfolgbarkeit von Requests
+## Read Vorgang
 
-Für jeden Request soll eine eindeutige ID generiert werden, die den Request im EUROPACE 2 System nachverfolgbar macht und so bei etwaigen Problemen oder Fehlern die systemübergreifende Analyse erleichtert.  
-Die Übermittlung der X-TraceId erfolgt über einen HTTP-Header. Dieser Header ist optional,
-wenn er nicht gesetzt ist, wird eine ID vom System generiert.
+**vorgang** ( vorgangsnummer: String! ) -> [Vorgang](#vorgang)!
 
-| Request Header Name | Beschreibung                    | Beispiel    |
-|---------------------|---------------------------------|-------------|
-| X-TraceId           | eindeutige Id für jeden Request | sys12345678 |
+> This query is for reading data of a [Vorgang](#vorgang).
 
-## Content-Type
+### Example
 
-Die Schnittstelle akzeptiert Daten mit Content-Type "**application/json**".  
-Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich das Encoding, wenn es nicht UTF-8 ist.
-
-| Request Header Name |   Header Value   |
-|---------------------|------------------|
-| Content-Type        | application/json |
-
-## Beispiel
-### POST Request
+#### POST Request
 
     POST https://www.europace2.de/kreditsmart/kex/vorgaenge
     Authorization: Bearer xxxxxxx
@@ -92,7 +98,7 @@ Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich
       }
     }
 
-### POST Response
+#### POST Response
 
     {
       "data": {
@@ -109,39 +115,60 @@ Entsprechend muss im Request der Content-Type Header gesetzt werden. Zusätzlich
       "errors": []
     }
 
+## Read Anträge of a Vorgang
 
-## Fehlercodes
+* This query is implemented as a subquery of the Vorgang datatype. 
+* If you do not specify an antragsnummer all antraege of a Vorgang will be exported.
 
-Die Besonderheit in GraphQL ist u.a., dass die meisten Fehler nicht über HTTP-Fehlercodes wiedergegeben werden.
-In vielen Fällen bekommt man einen Status 200 zurück, obwohl ein Fehler aufgetreten ist. Dafür gibt es das Attribut `errors` in der Response.
-Weitere Infos gibt es [hier](https://docs.api.europace.de/privatkredit/graphql/)
+**antraege** ( antragsnummer: String ) -> [[Antrag](#antrag)]
 
-### HTTP-Status Errors
+> This query is for reading [Antraege](#antrag) of a [Vorgang](#vorgang).
 
-| Fehlercode | Nachricht       | weitere Attribute          | Erklärung                            |
-|------------|-----------------|----------------------------|--------------------------------------|
-| 401        | Unauthorized    | -                          | Authentifizierung ist fehlgeschlagen |
-| 410        | Vorgang deleted | "vorgangsnummer": "123456" | Der Vorgang wurde gelöscht           |
+### Example
 
-### GraphQL Fehler
+#### POST Request
 
-| Fehlercode | Nachricht                  | Erklärung                                                                                      |
-|------------|----------------------------|------------------------------------------------------------------------------------------------|
-| 403        | Insufficient access rights | Es wird versucht auf einen Vorgang zuzugreifen, den die Vertriebsorganisation nicht lesen darf |
+    POST https://www.europace2.de/kreditsmart/kex/vorgaenge
+    Authorization: Bearer xxxxxxx
+    Content-Type: application/json;charset=utf-8
 
+    {
+      "query": "query getVorgang($vorgangsnummer: String!, $antragsnummer: String) {
+        vorgang(vorgangsnummer: $vorgangsnummer) {
+          vorgangsnummer
+          antraege(antragsnummer: $antragsnummer) {
+            antragsnummer
+          }
+        }
+      }",
+      "variables": {
+        "vorgangsnummer": "123456",
+        "antragsnummer": "123456/1/1"
+      }
+    }
 
-## Request Format
+#### POST Response
 
-Die Angaben werden als JSON im Body des Requests gesendet. Für eine bessere Lesbarkeit wird das Gesamtformat in *Typen* aufgebrochen, die an anderer Stelle definiert sind, aber an verwendeter Stelle eingesetzt werden müssen.
-Die Attribute innerhalb eines Blocks können in beliebiger Reihenfolge angegeben werden.  
-Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden sein (siehe auch den [Beispiel Request](#post-request)):
-
-    vorgang(vorgangsnummer: <vorgangsnummer>) {
-        <gewünschte Felder>
+    {
+      "data": {
+        "vorgang": {
+          "vorgangsnummer": "123456",
+          "antraege": [
+            {
+              "antragsnummer": "123456/1/1"
+            }
+          ]
+        }
+      }
+    }
+      },
+      "errors": []
     }
 
 
-## Vorgang
+## Response Types
+
+### Vorgang
 
     {
       "vorgangsnummer": String,
@@ -173,18 +200,18 @@ Für einen erfolgreichen Request muss die Query in folgendem Format vorhanden se
       "antraege": [Antrag]
     }
 
-> "letzteAenderungAm" zeigt NUR die letzte Änderung der Vorgangs-Daten an. Für Änderungen an den Anträgen wird das Feld "letzteAenderungAm" in jedem Antrag befüllt.
+`letzteAenderungAm` is only for the last change of a Vorgang. `letzteAenderungAm` for Anträge will be populated in each Antrag.
 
 
-### Partner
+#### Partner
 
     {
       "partnerId": String
     }
 
-Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
+The Europace 2 PartnerID has 5-characters and has the format ABC12.
 
-### Antragsteller
+#### Antragsteller
 
     {
       "personendaten": Personendaten,
@@ -193,7 +220,7 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
       "herkunft": Herkunft
     }
 
-#### Personendaten
+##### Personendaten
 
     {
       "anrede": "FRAU" | "HERR",
@@ -210,7 +237,7 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
       "vorname": String,
     }
 
-#### Wohnsituation
+##### Wohnsituation
 
     {
       "anschrift": {
@@ -226,9 +253,9 @@ Die Europace 2 PartnerID ist 5-stellig und hat das Format ABC12.
       "anzahlPersonenImHaushalt": Integer
     }
 
-Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
+The value of `gemeinsamerHaushalt` is only relevant for the second Antragsteller.
 
-#### Beschäftigung
+##### Beschäftigung
 
   	{
       "beschaeftigungsart": "ANGESTELLTER" | "ARBEITER" | "ARBEITSLOSER" | "BEAMTER" | "FREIBERUFLER" | "HAUSFRAU" | "RENTNER" | "SELBSTSTAENDIGER",
@@ -242,10 +269,9 @@ Die Angabe *gemeinsamerHaushalt* ist nur beim zweiten Antragsteller ausgefüllt.
       "arbeitsloser" : Arbeitsloser
     }
 
-> Die befüllten Felder zur Beschäftigung sind abhängig von der Beschäftigungsart.  
-__Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* befüllt
+The `beschaeftigungsart` determines which data is available. For example the `beschaeftigungsart=ARBEITER` means that all data of field `arbeiter` is available. All other fields will be empty.
 
-##### Arbeiter und Angestellter
+###### Arbeiter and Angestellter
 
     {
       "beschaeftigungsverhaeltnis": {
@@ -258,7 +284,7 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       }
     }
 
-##### Selbstständiger und Freiberufler
+###### Selbstständiger and Freiberufler
 
     {
       "firma": {
@@ -268,7 +294,7 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       "bruttoEinkommenLaufendesJahr": BigDecimal
     }
 
-##### Beamter
+###### Beamter
 
     {
       "beschaeftigungsverhaeltnis": {
@@ -279,26 +305,26 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       },
     }
 
-##### Hausfrau und Arbeitsloser
+###### Hausfrau and Arbeitsloser
 
     {
       "sonstigesEinkommenMonatlich": BigDecimal
     }
 
-##### Rentner
+###### Rentner
 
     {
       "rentnerSeit": "YYYY-MM-DD"
       "staatlicheRenteMonatlich": BigDecimal
     }
 
-##### Arbeitgeber
+###### Arbeitgeber
 
     {
       "name": String
     }
 
-#### Herkunft
+##### Herkunft
 
     {
       "staatsangehoerigkeit": Country
@@ -309,12 +335,12 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       "arbeitserlaubnisVorhanden": true | false
     }
 
-##### Aufenthaltstitel
+###### Aufenthaltstitel
 
     "VISUM" | "AUFENTHALTSERLAUBNIS" | "NIEDERLASSUNGSERLAUBNIS" | "ERLAUBNIS_ZUM_DAUERAUFENTHALT_EU"
 
 
-### Haushalt
+#### Haushalt
 
     {
       "kinder": [ Kind ],
@@ -327,23 +353,23 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       verbindlichkeiten : Verbindlichkeiten
     }
 
-#### Antragstellerzugehoerigkeit
+##### Antragstellerzugehoerigkeit
 
 	"ANTRAGSTELLER_1" | "ANTRAGSTELLER_2" | "BEIDE"
 
-#### Kind
+##### Kind
 
     {
       "name": String,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
 
-#### Verbindlichkeiten
+##### Verbindlichkeiten
     {
       "ratenkredite" : [RatenkreditVerbindlichkeit]
     }
 
-##### RatenkreditVerbindlichkeit
+###### RatenkreditVerbindlichkeit
 
     {
       "rateMonatlich": BigDecimal
@@ -359,7 +385,7 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       "glaeubiger": String
     }
 
-### Finanzbedarf
+#### Finanzbedarf
 
     {
       "fahrzeugkauf": {
@@ -373,19 +399,17 @@ __Beispiel:__ *beschaeftigungsart=ARBEITER*, dann wird der Knoten *arbeiter* bef
       }
     }
 
-Fahrzeugkauf wird nur befüllt, wenn als Finanzierungszweck "FAHRZEUGKAUF" gesetzt ist.
+The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEUGKAUF`.
 
-### Country
+#### Country
 
-    Die Übermittlung erfolgt im Format [ISO-3166/ALPHA-2](https://de.wikipedia.org/wiki/ISO-3166-1-Kodierliste)
+This Type uses the format [ISO-3166/ALPHA-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements)
 
-    Zusätzlich gibt es den Wert "SONSTIGE"
+In addition there is the value "SONSTIGE" ("other")
 
-### VersichertesRisiko
+    "AD" | "AE" | "AF" | "AG" | "AL" | "AM" | "AO" | "AR" | "AT" | "AU" | "AZ" | "BA" | "BB" | "BD" | "BE" | "BF" | "BG" | "BH" | "BI" | "BJ" | "BN" | "BO" | "BR" | "BS" | "BT" | "BW" | "BY" | "BZ" | "CA" | "CD" | "CF" | "CG" | "CH" | "CI" | "CK" | "CL" | "CM" | "CN" | "CO" | "CR" | "XK" | "CU" | "CV" | "CY" | "CZ" | "DE" | "DJ" | "DK" | "DM" | "DO" | "DZ" | "EC" | "EE" | "EG" | "ER" | "ES" | "ET" | "FI" | "FJ" | "FM" | "FR" | "GA" | "GB" | "GD" | "GE" | "GH" | "GM" | "GN" | "GQ" | "GR" | "GT" | "GW" | "GY" | "HN" | "HR" | "HT" | "HU" | "ID" | "IE" | "IL" | "IN" | "IQ" | "IR" | "IS" | "IT" | "JM" | "JO" | "JP" | "KE" | "KG" | "KH" | "KI" | "KM" | "KN" | "KP" | "KR" | "KW" | "KZ" | "LA" | "LB" | "LC" | "LI" | "LK" | "LR" | "LS" | "LT" | "LU" | "LV" | "LY" | "MA" | "MC" | "MD" | "ME" | "MG" | "MH" | "MK" | "ML" | "MM" | "MN" | "MR" | "MT" | "MU" | "MV" | "MW" | "MX" | "MY" | "MZ" | "NA" | "NE" | "NG" | "NI" | "NL" | "NO" | "NP" | "NR" | "NU" | "NZ" | "OM" | "PA" | "PE" | "PG" | "PH" | "PK" | "PL" | "PS" | "PT" | "PW" | "PY" | "QA" | "RO" | "RS" | "RU" | "RW" | "SA" | "SB" | "SC" | "SD" | "SE" | "SG" | "SI" | "SK" | "SL" | "SM" | "SN" | "SO" | "SR" | "SS" | "ST" | "SV" | "SY" | "SZ" | "TD" | "TG" | "TH" | "TJ" | "TL" | "TM" | "TN" | "TO" | "TR" | "TT" | "TV" | "TZ" | "UA" | "UG" | "US" | "UY" | "UZ" | "VA" | "VC" | "VE" | "VN" | "VU" | "WS" | "YE" | "ZA" | "ZM" | "ZW" | "SONSTIGE"
 
-Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
-
-### Antrag
+#### Antrag
 
     {
       "antragsnummer": String,
@@ -417,15 +441,16 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
       "identifikationAntragsteller2" : Identifikation
     }
     
-> `ausgehaendigtAm` zeigt NUR die letzte/jüngsten Aushändigung des Antrags an.
+The field `ausgehaendigtAm` ONLY shows the timestamp of the most recent Aushändigung of the Antrag.
+The field `produkttyp` can currently have one of the following values: `RATENKREDIT`, `BAUSPARKASSE_MODERNISIERUNGSKREDIT`
 
-#### BenoetigteUnterlage
+##### BenoetigteUnterlage
 
     {
       "unterlage": String
     }
 
-#### Ratenschutz
+##### Ratenschutz
 
     {
       "versicherteRisikenAntragsteller1": [ VersichertesRisiko ]
@@ -433,9 +458,9 @@ Das versicherte Risiko kann aktuell die folgenden Werte annhemen: `ARBEITSLOSIGK
       "praemieMonatlich": BigDecimal
     }
 
-Der Produkttyp kann aktuell die folgenden Werte annehmen: `RATENKREDIT`, `BAUSPARKASSE_MODERNISIERUNGSKREDIT`
+The type `VersichertesRisiko` can currently have one of the following values: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
 
-### Ratenkredit
+#### Ratenkredit
 
     {
       "produktanbieterId": String,
@@ -445,9 +470,9 @@ Der Produkttyp kann aktuell die folgenden Werte annehmen: `RATENKREDIT`, `BAUSPA
       "vorlaufzinsenProTag": BigDecimal
     }
 
-Die Produktart kann aktuell die folgenden Werte annhemen: `AUTOKREDIT`, `MODERNISIERUNGSKREDIT`, `RATENKREDIT`, `BUSINESSKREDIT`
+The field `produktart` can currently have one of the following values: `AUTOKREDIT`, `MODERNISIERUNGSKREDIT`, `RATENKREDIT`, `BUSINESSKREDIT`
 
-### Gesamtkonditionen
+#### Gesamtkonditionen
 
     {
       "auszahlungsbetrag": BigDecimal,
@@ -459,47 +484,24 @@ Die Produktart kann aktuell die folgenden Werte annhemen: `AUTOKREDIT`, `MODERNI
       "sollzins": BigDecimal
     }
 
-Prozentwerte wie der Sollzins sind 100-basiert.
+The percentage values (`effektivzins`, `sollzins`) are based on 100 (`1.23` instead of `0.0123`).
 
-### Dokument
+#### Dokument
 
     {
       "url": String,
       "name": String
     }
     
-### Identifikation
+#### Identifikation
     {
       antragstellername: String 
       qesUrl: String
       referenznummer: String
       videolegitimationUrl: String
     }
-    
-Das Property `antragstellername` enthält den Namen im Format “\<vorname\> \<nachname\>”.
 
+The field `antragstellername` contains the name in the format "\<first name\> \<last name\>".
 
-
-## Response Format
-
-Die erfragten Felder werden - sofern vorhanden- als JSON im Body der Response gesendet. Nicht befüllte Felder werden nicht zurückgegeben.
-
-    {
-      "data": {
-        "vorgang": {
-          << ANGEFRAGTE FELDER >>
-        }
-      },
-      "errors": [
-        << EVENTUELL AUFGETRETENE FEHLER >>
-      ]
-    }
-
-## Tools
-
-Es gibt verschiedene [Tools](https://docs.api.europace.de/privatkredit/graphql/) für GraphQL.
-Für [Postman](https://www.getpostman.com/) stellen wir im [Schnellstarter-Projekt](https://github.com/europace/api-schnellstart/)
-auch eine Collection mit einem Beispiel für die "KreditSmart Vorgänge API" zur Verfügung, wenn man keinen GraphQL-Client verwenden möchte.
-
-## Nutzungsbedingungen
-Die APIs werden unter folgenden [Nutzungsbedingungen](https://docs.api.europace.de/nutzungsbedingungen/) zur Verfügung gestellt
+## Terms of use
+The APIs are made available under the following [Terms of Use](https://docs.api.europace.de/terms/).

@@ -1,30 +1,32 @@
 # KEX-Vorgang-Export-API
+
 > ⚠️ You'll find German domain-specific terms in the documentation, for translations and further explanations please refer to our [glossary](https://docs.api.europace.de/common/glossary/)
 
 ## General
 
-An API to read data of KreditSmart Vorgänge.  
-All APIs documented here are [GraphQL-APIs](https://docs.api.europace.de/privatkredit/graphql/).
+An API to read data of KreditSmart-Vorgänge. The URL for this service is:
 
     https://www.europace2.de/kreditsmart/kex/vorgaenge
 
+All APIs documented here are [GraphQL-APIs](https://docs.api.europace.de/privatkredit/graphql/).
+
 > ⚠️ This API is continuously developed. Therefore we expect
 > all users to align with the "[Tolerant Reader Pattern](https://martinfowler.com/bliki/TolerantReader.html)", which requires clients to be
-> tolerant towards compatible API-Changes when reading and processing the data. This means:
+> tolerant towards compatible API changes when reading and processing the data. This means:
 >
 > 1. unknown properties must not result in errors
 >
 > 2. Strings with a restricted set of values (Enums) must support new unknown values
 >
-> 3. sensible usage of HTTP-Statuscodes, even if they are not explicitly documented
+> 3. sensible usage of HTTP status codes, even if they are not explicitly documented
 >
 
 <!-- https://opensource.zalando.com/restful-api-guidelines/#108 -->
 
 ### Authentication
 
-These APIs are secured by the OAuth client credentials flow using the [Authorization-API](https://docs.api.europace.de/privatkredit/authentifizierung/).
-To use these APIs your OAuth2-Client needs the following Scopes:
+These APIs are secured by the OAuth 2.0 client credentials flow using the [Authorization-API](https://docs.api.europace.de/privatkredit/authentifizierung/).
+To use these APIs your OAuth2-Client needs the following scopes:
 
 | Scope                      | Label in Partnermanagement | Description                         |
 |----------------------------|----------------------------|-------------------------------------|
@@ -32,12 +34,12 @@ To use these APIs your OAuth2-Client needs the following Scopes:
 
 ### GraphQL-Requests
 
-These APIs accept data with the Content-Type "**application/json**" with UTF-8 encoding.
+These APIs accept data with the content-type **application/json** with UTF-8 encoding.
 The fields inside a block can be sent in any order.
 
 The APIs support all common GraphQL formats. More information can be found at [https://graphql.org/learn/queries/](https://graphql.org/learn/queries/).
 
-The body of a GraphQL request contains the field `query`, which includes the GraphQL query as a String. Parameters can be set directly in the query or defined as variables. The variables can be sent in the `variables` field of the body as a key-value-map.
+The body of a GraphQL request contains the field `query`, which includes the GraphQL query as a String. Parameters can be set directly in the query or defined as variables. The variables can be sent in the `variables` field of the body as a key-value map.
 All our examples use variables.
 
     {
@@ -61,11 +63,11 @@ More information about error codes can be found [here](https://docs.api.europace
 
 #### GraphQL Errors
 
-| Error Code | Message     | Further attributes         | Description                                                                                    |
-|------------|-------------|----------------------------|------------------------------------------------------------------------------------------------|
-| 400        | Bad Request | -                          | Request format is invalid (mandatory fields are missing, wrong parameter names or values, ...) |
-| 403        | Forbidden   | -                          | The authenticated user does not have sufficient rights to read the Vorgang                     |
-| 410        | Gone        | "vorgangsnummer": "123456" | The Vorgang was deleted in the meantime                                                        |
+| Error Code | Message     | Description                                                                                    |
+|------------|-------------|------------------------------------------------------------------------------------------------|
+| 400        | Bad Request | Request format is invalid (mandatory fields are missing, wrong parameter names or values, ...) |
+| 403        | Forbidden   | The authenticated user does not have sufficient rights to read the Vorgang                     |
+| 410        | Gone        | The Vorgang was deleted in the meantime                                                        |
 
 ## Read Vorgang
 
@@ -118,7 +120,7 @@ More information about error codes can be found [here](https://docs.api.europace
 ## Read Anträge of a Vorgang
 
 * This query is implemented as a subquery of the Vorgang datatype. 
-* If you do not specify an antragsnummer all antraege of a Vorgang will be exported.
+* If you do not specify an antragsnummer all Anträge of a Vorgang will be exported.
 
 **antraege** ( antragsnummer: String ) -> [[Antrag](#antrag)]
 
@@ -209,7 +211,7 @@ More information about error codes can be found [here](https://docs.api.europace
       "partnerId": String
     }
 
-The Europace 2 PartnerID has 5-characters and has the format ABC12.
+The Europace 2 Partner-ID has 5-characters and has the format ABC12.
 
 #### Antragsteller
 
@@ -269,7 +271,7 @@ The value of `gemeinsamerHaushalt` is only relevant for the second Antragsteller
       "arbeitsloser" : Arbeitsloser
     }
 
-The `beschaeftigungsart` determines which data is available. For example the `beschaeftigungsart=ARBEITER` means that all data of field `arbeiter` is available. All other fields will be empty.
+The `beschaeftigungsart` determines which data is available. For example the `beschaeftigungsart=ARBEITER` means that data for the field `arbeiter` is available. All other fields will be empty.
 
 ###### Arbeiter and Angestellter
 
@@ -441,8 +443,8 @@ In addition there is the value "SONSTIGE" ("other")
       "identifikationAntragsteller2" : Identifikation
     }
     
-The field `ausgehaendigtAm` ONLY shows the timestamp of the most recent Aushändigung of the Antrag.
-The field `produkttyp` can currently have one of the following values: `RATENKREDIT`, `BAUSPARKASSE_MODERNISIERUNGSKREDIT`
+The field `ausgehaendigtAm` shows only the timestamp of the most recent issuing of the Antrag.
+The field `produkttyp` can currently be one of the following values: `RATENKREDIT`, `BAUSPARKASSE_MODERNISIERUNGSKREDIT`
 
 ##### BenoetigteUnterlage
 
@@ -458,7 +460,7 @@ The field `produkttyp` can currently have one of the following values: `RATENKRE
       "praemieMonatlich": BigDecimal
     }
 
-The type `VersichertesRisiko` can currently have one of the following values: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
+The type `VersichertesRisiko` can currently be one of the following values: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
 
 #### Ratenkredit
 
@@ -470,7 +472,7 @@ The type `VersichertesRisiko` can currently have one of the following values: `A
       "vorlaufzinsenProTag": BigDecimal
     }
 
-The field `produktart` can currently have one of the following values: `AUTOKREDIT`, `MODERNISIERUNGSKREDIT`, `RATENKREDIT`, `BUSINESSKREDIT`
+The field `produktart` can currently be one of the following values: `AUTOKREDIT`, `MODERNISIERUNGSKREDIT`, `RATENKREDIT`, `BUSINESSKREDIT`
 
 #### Gesamtkonditionen
 

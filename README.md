@@ -242,20 +242,25 @@ The Europace 2 Partner-ID has 5-characters and has the format ABC12.
 ##### Wohnsituation
 
     {
-      "anschrift": {
-        "strasse": String,
-        "hausnummer": String,
-        "plz": String,
-        "ort": String,
-        "wohnhaftSeit": "YYYY-MM-DD"
-      },
+      "anschrift": Wohnanschrift
+      "voranschrift": Wohnanschrift
       "gemeinsamerHaushalt": true | false
       "wohnart": "ZUR_MIETE" | "ZUR_UNTERMIETE" | "IM_EIGENEN_HAUS" | "BEI_DEN_ELTERN"
       "anzahlPkw": Integer
       "anzahlPersonenImHaushalt": Integer
     }
-
+    
 The value of `gemeinsamerHaushalt` is only relevant for the second Antragsteller.
+    
+###### Wohnanschrift
+
+    {
+        "strasse": String,
+        "hausnummer": String,
+        "plz": String,
+        "ort": String,
+        "wohnhaftSeit": "YYYY-MM-DD"
+    }
 
 ##### Beschäftigung
 
@@ -335,6 +340,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "aufenthaltstitel": Aufenthaltstitel
       "aufenthaltBefristetBis": "YYYY-MM-DD"
       "arbeitserlaubnisVorhanden": true | false
+      "arbeitserlaubnisBefristetBis": "YYYY-MM-DD"
     }
 
 ###### Aufenthaltstitel

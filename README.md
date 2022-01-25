@@ -249,7 +249,7 @@ The Europace 2 Partner-ID has 5-characters and has the format ABC12.
       "anzahlPkw": Integer
       "anzahlPersonenImHaushalt": Integer
     }
-    
+
 The value of `gemeinsamerHaushalt` is only relevant for the second Antragsteller.
     
 ###### Wohnanschrift

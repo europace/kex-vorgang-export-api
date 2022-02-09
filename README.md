@@ -282,18 +282,27 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 
     {
       "beschaeftigungsverhaeltnis": {
+        "berufsbezeichnung": String,
         "arbeitgeber": Arbeitgeber,
         "befristung": "BEFRISTET" | "UNBEFRISTET",
         "befristetBis": "YYYY-MM-DD",
         "inProbezeit": true | false
         "beschaeftigtSeit": "YYYY-MM-DD"
         "nettoeinkommenMonatlich": BigDecimal
+      },
+      "vorherigesBeschaeftigungsverhaeltnis": {
+        "arbeitgeber": {
+          "name": String
+        }
+        "beschaeftigtSeit": "YYYY-MM-DD",
+        "beschaeftigtBis": "YYYY-MM-DD"
       }
     }
 
 ###### Selbstständiger and Freiberufler
 
     {
+      "berufsbezeichnung": String,
       "firma": {
         "name": String
       }
@@ -305,11 +314,19 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 
     {
       "beschaeftigungsverhaeltnis": {
+        "berufsbezeichnung": String,
         "inProbezeit": true | false,
         "arbeitgeber": Arbeitgeber,
         "verbeamtetSeit": "YYYY-MM-DD"
         "nettoeinkommenMonatlich": BigDecimal
       },
+      "vorherigesBeschaeftigungsverhaeltnis": {
+        "arbeitgeber": {
+          "name": String
+        }
+        "beschaeftigtSeit": "YYYY-MM-DD",
+        "beschaeftigtBis": "YYYY-MM-DD"
+      }
     }
 
 ###### Hausfrau and Arbeitsloser

@@ -463,7 +463,10 @@ In addition there is the value "SONSTIGE" ("other")
       "benoetigteUnterlagen" : [BenoetigteUnterlage],
       "dokumente" : [Dokument],
       "identifikationAntragsteller1" : Identifikation,
-      "identifikationAntragsteller2" : Identifikation
+      "identifikationAntragsteller2" : Identifikation,
+      "machbarkeit": {
+        "status": "MACHBAR" | "MACHBAR_UNTER_VORBEHALT" | "NICHT_MACHBAR"
+      }
     }
     
 The field `ausgehaendigtAm` shows only the timestamp of the most recent issuing of the Antrag.

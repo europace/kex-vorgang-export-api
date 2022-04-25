@@ -392,6 +392,9 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ##### Verbindlichkeiten
     {
       "ratenkredite" : [RatenkreditVerbindlichkeit]
+      "sonstigeVerbindlichkeiten" : [SonstigeVerbindlichkeit]
+      "kreditkarten" : [KreditkartenVerbindlichkeit]
+      "dispositionskredite" : [DispostionskreditVerbindlichkeit]
     }
 
 ###### RatenkreditVerbindlichkeit
@@ -405,6 +408,57 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "datumErsteZahlung": "YYYY-MM-DD"
       "abloesen": Boolean
       "iban": String
+      "bic": String
+      "kreditinstitut": String
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+      "glaeubiger": String
+    }
+    
+###### SonstigeVerbindlichkeit
+
+    {
+      "rateMonatlich": BigDecimal
+      "schlussrate": BigDecimal
+      "datumLetzteRate": "YYYY-MM-DD"
+      "restschuld": BigDecimal
+      "urspruenglicherKreditbetrag": BigDecimal
+      "datumErsteZahlung": "YYYY-MM-DD"
+      "abloesen": Boolean
+      "iban": String
+      "bic": String
+      "kreditinstitut": String
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+      "glaeubiger": String
+    }
+    
+###### KreditkartenVerbindlichkeit
+
+    {
+      "rateMonatlich": BigDecimal
+      "zinssatz": BigDecimal
+      "datumLetzteRate": "YYYY-MM-DD"
+      "beanspruchterBetrag": BigDecimal
+      "verfuegungsrahmen": BigDecimal
+      "datumErsteZahlung": "YYYY-MM-DD"
+      "abloesen": Boolean
+      "iban": String
+      "bic": String
+      "kreditinstitut": String
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+      "glaeubiger": String
+    }
+        
+###### DispostionskreditVerbindlichkeit
+
+    {
+      "zinssatz": BigDecimal
+      "datumLetzteRate": "YYYY-MM-DD"
+      "beanspruchterBetrag": BigDecimal
+      "verfuegungsrahmen": BigDecimal
+      "datumErsteZahlung": "YYYY-MM-DD"
+      "abloesen": Boolean
+      "iban": String
+      "bic": String
       "kreditinstitut": String
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
       "glaeubiger": String

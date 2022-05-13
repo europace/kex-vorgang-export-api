@@ -374,8 +374,9 @@ The `beschaeftigungsart` determines which data is available. For example the `be
         "bic": String,
         "kreditinstitut": String,
         "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
-      }
-      verbindlichkeiten : Verbindlichkeiten
+      },
+      verbindlichkeiten : Verbindlichkeiten,
+      ausgaben: Ausgaben,
     }
 
 ##### Antragstellerzugehoerigkeit
@@ -468,28 +469,149 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### LeasingVerbindlichkeit
 
     {
-      "rateMonatlich": BigDecimal
-      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
-      "glaeubiger": String
-      "schlussrate": BigDecimal
+      "rateMonatlich": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
+      "glaeubiger": String,
+      "schlussrate": BigDecimal,
       "datumLetzteRate": "YYYY-MM-DD"
+    }
+
+##### Ausgaben
+
+    {
+      "mietausgaben": [ Mietausgabe ],
+      "privateKrankenversicherungen": [ PrivateKrankenversicherung ],
+      "sonstigeAusgaben": [ SonstigeAusgabe ],
+      "unterhaltsverpflichtungen": [ Unterhaltsverpflichtung ]
+    }
+ 
+###### Mietausgabe
+
+    {
+      "betragMonatlich": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+    }   
+    
+###### PrivateKrankenversicherung
+
+    {
+      "betragMonatlich": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+    } 
+    
+###### SonstigeAusgabe
+
+    {
+      "betragMonatlich": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+    } 
+    
+###### Unterhaltsverpflichtung
+
+    {
+      "betragMonatlich": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+    } 
+    
+##### Einnahmen
+
+    {
+      "einkuenfteAusNebentaetigkeit": [ EinkunftAusNebentaetigkeit ],
+      "ehegattenunterhalt": [ Ehegattenunterhalt ],
+      "unbefristeteZusatzrenten": [ UnbefristeteZusatzrente ],
+      "sonstigeEinnahmen": [ SonstigeEinnahme ]
+    }
+
+###### EinkunftAusNebentaetigkeit
+
+    {
+      "beginnDerTaetigkeit": "YYYY-MM-DD",
+      "betragMonatlich": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+    }
+    
+###### Ehegattenunterhalt
+
+    {
+      "betragMonatlich": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+    }
+    
+###### UnbefristeteZusatzrente
+
+    {
+      "betragMonatlich": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+    }
+    
+###### SonstigeEinnahme
+
+    {
+      "betragMonatlich": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+    }
+    
+##### Vermoegen
+    {
+      "bausparvertraege": [ Bausparvertrag ],
+      "depotvermoegen": [ Depotvermoegen ],
+      "lebensversicherungen": [ Lebensversicherung ]
+    }
+
+###### Bausparvertrag
+    {
+      "angesparterBetrag": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
+      "sparbeitragMonatlich": BigDecimal
+    }
+    
+###### Depotvermoegen
+    {
+      "betrag": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+    }
+    
+###### Lebensversicherung
+    {
+      "praemieMonatlich": BigDecimal,
+      "rueckkaufswert": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
     
 #### Finanzbedarf
 
     {
-      "fahrzeugkauf": {
-        "kaufpreis": BigDecimal,
-      }
+      "fahrzeugkauf": Fahrzeugkauf,
       "finanzierungszweck": "UMSCHULDUNG" | "FAHRZEUGKAUF" | "MODERNISIEREN" | "FREIE_VERWENDUNG",
-      "finanzierungswunsch": {
-        "laufzeitInMonaten": Integer,
-        "kreditbetrag": BigDecimal,
-        "rateMonatlich": BigDecimal
-      }
+      "finanzierungswunsch": Finanzierungswunsch
     }
 
 The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEUGKAUF`.
+
+##### Fahrzeugkauf
+    
+    {
+      "kaufpreis": BigDecimal,
+      "anbieter": "HAENDLER" | "PRIVAT"
+      "beglicheneKosten": BigDecimal,
+      "erstzulassungsdatum": "YYYY-MM-DD",
+      "kaufpreis": BigDecimal,
+      "kw": Integer, 
+      "laufleistung": Integer,
+      "marke": String,
+      "modell": String,
+      "ps": Integer,
+    }
+
+##### Finanzierungswunsch
+    {
+      "laufzeitInMonaten": Integer,
+      "kreditbetrag": BigDecimal,
+      "rateMonatlich": BigDecimal,
+      "ratenzahlungstermin": "MONATSMITTE" | "MONATSENDE",
+      "provisionswunschInProzent": BigDecimal
+    }
+    
 
 #### Country
 

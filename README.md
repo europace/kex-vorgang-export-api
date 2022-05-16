@@ -554,7 +554,6 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ##### Vermoegen
     {
       "bausparvertraege": [ Bausparvertrag ],
-      "depotvermoegen": [ Depotvermoegen ],
       "lebensversicherungen": [ Lebensversicherung ]
     }
 
@@ -563,12 +562,6 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "angesparterBetrag": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
       "sparbeitragMonatlich": BigDecimal
-    }
-    
-###### Depotvermoegen
-    {
-      "betrag": BigDecimal,
-      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
     
 ###### Lebensversicherung

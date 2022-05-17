@@ -516,10 +516,10 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ##### Einnahmen
 
     {
-      "einkuenfteAusNebentaetigkeit": [ EinkunftAusNebentaetigkeit ],
       "ehegattenunterhalt": [ Ehegattenunterhalt ],
-      "unbefristeteZusatzrenten": [ UnbefristeteZusatzrente ],
+      "einkuenfteAusNebentaetigkeit": [ EinkunftAusNebentaetigkeit ],
       "sonstigeEinnahmen": [ SonstigeEinnahme ]
+      "unbefristeteZusatzrenten": [ UnbefristeteZusatzrente ],
     }
 
 ###### EinkunftAusNebentaetigkeit
@@ -566,17 +566,17 @@ The `beschaeftigungsart` determines which data is available. For example the `be
     
 ###### Lebensversicherung
     {
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
       "praemieMonatlich": BigDecimal,
       "rueckkaufswert": BigDecimal,
-      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
     
 #### Finanzbedarf
 
     {
       "fahrzeugkauf": Fahrzeugkauf,
-      "finanzierungszweck": "UMSCHULDUNG" | "FAHRZEUGKAUF" | "MODERNISIEREN" | "FREIE_VERWENDUNG",
       "finanzierungswunsch": Finanzierungswunsch
+      "finanzierungszweck": "UMSCHULDUNG" | "FAHRZEUGKAUF" | "MODERNISIEREN" | "FREIE_VERWENDUNG",
     }
 
 The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEUGKAUF`.
@@ -584,10 +584,10 @@ The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEU
 ##### Fahrzeugkauf
     
     {
-      "kaufpreis": BigDecimal,
       "anbieter": "HAENDLER" | "PRIVAT"
       "beglicheneKosten": BigDecimal,
       "erstzulassungsdatum": "YYYY-MM-DD",
+      "kaufpreis": BigDecimal,
       "kaufpreis": BigDecimal,
       "kw": Integer, 
       "laufleistung": Integer,

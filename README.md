@@ -375,8 +375,9 @@ The `beschaeftigungsart` determines which data is available. For example the `be
         "kreditinstitut": String,
         "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
       },
-      verbindlichkeiten : Verbindlichkeiten,
-      ausgaben: Ausgaben,
+      "verbindlichkeiten" : Verbindlichkeiten,
+      "ausgaben": Ausgaben,
+      "immobilien": [ Immobilie ]
     }
 
 ##### Antragstellerzugehoerigkeit
@@ -386,8 +387,10 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ##### Kind
 
     {
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
+      "kindergeldFuer": "ERSTES_ODER_ZWEITES_KIND" | "DRITTES_KIND" | "AB_VIERTEM_KIND",
       "name": String,
-      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+      "unterhaltseinnahmenMonatlich": BigDecimal
     }
 
 ##### Verbindlichkeiten
@@ -566,9 +569,33 @@ The `beschaeftigungsart` determines which data is available. For example the `be
     
 ###### Lebensversicherung
     {
-      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
       "praemieMonatlich": BigDecimal,
-      "rueckkaufswert": BigDecimal,
+      "rueckkaufswert": BigDecimal
+    }
+
+##### Immobilie
+
+    {
+      "bezeichnung": String,
+      "darlehen": [ Darlehen ],
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
+      "immobilienart": "EIGENTUMSWOHNUNG" | "EINFAMILIENHAUS" | "MEHRFAMILIENHAUS" | "BUEROGEBAEUDE",
+      "mieteinnahmenKaltMonatlich": BigDecimal,
+      "mieteinnahmenWarmMonatlich": BigDecimal,
+      "nebenkostenMonatlich": BigDecimal,
+      "nutzungsart": "EIGENGENUTZT" | "VERMIETET" | "EIGENGENUTZT_UND_VERMIETET",
+      "vermieteteWohnflaeche": Integer,
+      "wert": BigDecimal,
+      "wohnflaeche": Integer
+    }
+
+###### Darlehen
+    
+    {
+      "rateMonatlich": BigDecimal,
+      "restschuld": BigDecimal,
+      "zinsbindungBis": "YYYY-MM-DD"
     }
     
 #### Finanzbedarf
@@ -597,6 +624,7 @@ The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEU
     }
 
 ##### Finanzierungswunsch
+
     {
       "laufzeitInMonaten": Integer,
       "kreditbetrag": BigDecimal,

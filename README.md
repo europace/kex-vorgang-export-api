@@ -291,9 +291,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
         "nettoeinkommenMonatlich": BigDecimal
       },
       "vorherigesBeschaeftigungsverhaeltnis": {
-        "arbeitgeber": {
-          "name": String
-        }
+        "arbeitgeber": Arbeitgeber,
         "beschaeftigtSeit": "YYYY-MM-DD",
         "beschaeftigtBis": "YYYY-MM-DD"
       }
@@ -303,11 +301,22 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 
     {
       "berufsbezeichnung": String,
-      "firma": {
-        "name": String
-      }
-      "selbststaendigSeit": "YYYY-MM-DD"
-      "bruttoEinkommenLaufendesJahr": BigDecimal
+      "firma": Firma,
+      "selbststaendigSeit": "YYYY-MM-DD",
+      "selbststaendigSeit": "YYYY-MM-DD",
+      "nettoeinkommenJaehrlich": BigDecimal,
+      "bruttoEinkommenLaufendesJahr": BigDecimal,
+      "einkommenssteuerLaufendesJahr": BigDecimal,
+      "abschreibungenLaufendesJahr": BigDecimal,
+      "bruttoEinkommenLetztesJahr": BigDecimal,
+      "einkommenssteuerLetztesJahr": BigDecimal,
+      "abschreibungenLetztesJahr": BigDecimal,
+      "bruttoEinkommenVor2Jahren": BigDecimal,
+      "einkommenssteuerVor2Jahren": BigDecimal,
+      "abschreibungenVor2Jahren": BigDecimal,
+      "bruttoEinkommenVor3Jahren": BigDecimal,
+      "einkommenssteuerVor3Jahren": BigDecimal,
+      "abschreibungenVor3Jahren": BigDecimal
     }
 
 ###### Beamter
@@ -321,9 +330,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
         "nettoeinkommenMonatlich": BigDecimal
       },
       "vorherigesBeschaeftigungsverhaeltnis": {
-        "arbeitgeber": {
-          "name": String
-        }
+        "arbeitgeber": Arbeitgeber,
         "beschaeftigtSeit": "YYYY-MM-DD",
         "beschaeftigtBis": "YYYY-MM-DD"
       }
@@ -338,14 +345,34 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### Rentner
 
     {
-      "rentnerSeit": "YYYY-MM-DD"
-      "staatlicheRenteMonatlich": BigDecimal
+      "rentnerSeit": "YYYY-MM-DD",
+      "staatlicheRenteMonatlich": BigDecimal,
+      "rentenversicherung": {
+        "anschrift": Anschrift,
+        "name": String
+      }
     }
-
-###### Arbeitgeber
+    
+###### Arbeitgeber and Firma
 
     {
+      "anschrift": Anschrift,
+      "brance": Branche,
       "name": String
+    }
+
+###### Branche
+
+    "LANDWIRTSCHAFT_FORSTWIRTSCHAFT_FISCHEREI" | "ENERGIE_WASSERVERSORGUNG_BERGBAU" | "VERARBEITENDES_GEWERBE" | "BAUGEWERBE" | "HANDEL" | "VERKEHR_LOGISTIK" | "INFORMATION_KOMMUNIKATION" | "GEMEINNUETZIGE_ORGANISATION" | "KREDITINSTITUTE_VERSICHERUNGEN" | "PRIVATE_HAUSHALTE" | "DIENSTLEISTUNGEN" | "OEFFENTLICHER_DIENST" | "GEBIETSKOERPERSCHAFTEN" | "HOTEL_GASTRONOMIE" | "ERZIEHUNG_UNTERRICHT" | "KULTUR_SPORT_UNTERHALTUNG" | "GESUNDHEIT_SOZIALWESEN"
+
+###### Anschrift
+
+    {
+      "strasse": String,
+      "hausnummer": String,
+      "plz": String,
+      "ort": String,
+      "land": Country
     }
 
 ##### Herkunft
@@ -602,8 +629,10 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 
     {
       "fahrzeugkauf": Fahrzeugkauf,
-      "finanzierungswunsch": Finanzierungswunsch
+      "finanzierungswunsch": Finanzierungswunsch,
       "finanzierungszweck": "UMSCHULDUNG" | "FAHRZEUGKAUF" | "MODERNISIEREN" | "FREIE_VERWENDUNG",
+      "ratenschutzAntragsteller1": FinanzbedarfRatenschutz,
+      "ratenschutzAntragsteller2": FinanzbedarfRatenschutz
     }
 
 The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEUGKAUF`.
@@ -611,7 +640,7 @@ The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEU
 ##### Fahrzeugkauf
     
     {
-      "anbieter": "HAENDLER" | "PRIVAT"
+      "anbieter": "HAENDLER" | "PRIVAT",
       "beglicheneKosten": BigDecimal,
       "erstzulassungsdatum": "YYYY-MM-DD",
       "kaufpreis": BigDecimal,
@@ -620,7 +649,7 @@ The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEU
       "laufleistung": Integer,
       "marke": String,
       "modell": String,
-      "ps": Integer,
+      "ps": Integer
     }
 
 ##### Finanzierungswunsch
@@ -633,6 +662,22 @@ The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEU
       "provisionswunschInProzent": BigDecimal
     }
     
+##### FinanzbedarfRatenschutz
+    
+    {
+      arbeitslosigkeitAbsicherung: RatenschutzAbsicherung,
+      arbeitsunfaehigkeitAbsicherung: RatenschutzAbsicherung,
+      todesfallAbsicherung: RatenschutzAbsicherung
+    }
+    
+###### RatenschutzAbsicherung
+
+    {
+      gewuenscht: Boolean,
+      kommentar: String,
+      vorhanden: Boolean,
+      wichtig: Boolean
+    }
 
 #### Country
 

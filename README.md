@@ -39,7 +39,8 @@ The fields inside a block can be sent in any order.
 
 The APIs support all common GraphQL formats. More information can be found at [https://graphql.org/learn/queries/](https://graphql.org/learn/queries/).
 
-The body of a GraphQL request contains the field `query`, which includes the GraphQL query as a String. Parameters can be set directly in the query or defined as variables. The variables can be sent in the `variables` field of the body as a key-value map.
+The body of a GraphQL request contains the field `query`, which includes the GraphQL query as a String. Parameters can be set directly in the query or defined as variables. The variables can be sent
+in the `variables` field of the body as a key-value map.
 All our examples use variables.
 
     {
@@ -119,7 +120,7 @@ More information about error codes can be found [here](https://docs.api.europace
 
 ## Read Anträge of a Vorgang
 
-* This query is implemented as a subquery of the Vorgang datatype. 
+* This query is implemented as a subquery of the Vorgang datatype.
 * If you do not specify an antragsnummer all Anträge of a Vorgang will be exported.
 
 **antraege** ( antragsnummer: String ) -> [[Antrag](#antrag)]
@@ -167,7 +168,6 @@ More information about error codes can be found [here](https://docs.api.europace
       "errors": []
     }
 
-
 ## Response Types
 
 ### Vorgang
@@ -203,7 +203,6 @@ More information about error codes can be found [here](https://docs.api.europace
     }
 
 `letzteAenderungAm` is only for the last change of a Vorgang. `letzteAenderungAm` for Anträge will be populated in each Antrag.
-
 
 #### Partner
 
@@ -251,7 +250,7 @@ The Europace 2 Partner-ID has 5-characters and has the format ABC12.
     }
 
 The value of `gemeinsamerHaushalt` is only relevant for the second Antragsteller.
-    
+
 ###### Wohnanschrift
 
     {
@@ -352,7 +351,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
         "name": String
       }
     }
-    
+
 ###### Arbeitgeber and Firma
 
     {
@@ -391,10 +390,12 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 
     "VISUM" | "AUFENTHALTSERLAUBNIS" | "NIEDERLASSUNGSERLAUBNIS" | "ERLAUBNIS_ZUM_DAUERAUFENTHALT_EU"
 
-
 #### Haushalt
 
     {
+      "ausgaben": Ausgaben,
+      "einnahmen": Einnahmen,
+      "immobilien": [ Immobilie ]
       "kinder": [ Kind ],
       "kontoverbindung": {
         "iban": String,
@@ -403,8 +404,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
         "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
       },
       "verbindlichkeiten" : Verbindlichkeiten,
-      "ausgaben": Ausgaben,
-      "immobilien": [ Immobilie ]
+      "vermoegen": Vermoegen,
     }
 
 ##### Antragstellerzugehoerigkeit
@@ -421,6 +421,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
     }
 
 ##### Verbindlichkeiten
+
     {
       "ratenkredite" : [RatenkreditVerbindlichkeit]
       "sonstigeVerbindlichkeiten" : [SonstigeVerbindlichkeit]
@@ -445,7 +446,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
       "glaeubiger": String
     }
-    
+
 ###### SonstigeVerbindlichkeit
 
     {
@@ -462,16 +463,14 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
       "glaeubiger": String
     }
-    
+
 ###### KreditkartenVerbindlichkeit
 
     {
       "rateMonatlich": BigDecimal
       "zinssatz": BigDecimal
-      "datumLetzteRate": "YYYY-MM-DD"
       "beanspruchterBetrag": BigDecimal
       "verfuegungsrahmen": BigDecimal
-      "datumErsteZahlung": "YYYY-MM-DD"
       "abloesen": Boolean
       "iban": String
       "bic": String
@@ -479,15 +478,13 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
       "glaeubiger": String
     }
-        
+
 ###### DispostionskreditVerbindlichkeit
 
     {
       "zinssatz": BigDecimal
-      "datumLetzteRate": "YYYY-MM-DD"
       "beanspruchterBetrag": BigDecimal
       "verfuegungsrahmen": BigDecimal
-      "datumErsteZahlung": "YYYY-MM-DD"
       "abloesen": Boolean
       "iban": String
       "bic": String
@@ -495,7 +492,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
       "glaeubiger": String
     }
-    
+
 ###### LeasingVerbindlichkeit
 
     {
@@ -514,35 +511,35 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "sonstigeAusgaben": [ SonstigeAusgabe ],
       "unterhaltsverpflichtungen": [ Unterhaltsverpflichtung ]
     }
- 
+
 ###### Mietausgabe
 
     {
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }   
-    
+
 ###### PrivateKrankenversicherung
 
     {
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     } 
-    
+
 ###### SonstigeAusgabe
 
     {
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     } 
-    
+
 ###### Unterhaltsverpflichtung
 
     {
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     } 
-    
+
 ##### Einnahmen
 
     {
@@ -559,42 +556,45 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
-    
+
 ###### Ehegattenunterhalt
 
     {
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
-    
+
 ###### UnbefristeteZusatzrente
 
     {
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
-    
+
 ###### SonstigeEinnahme
 
     {
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
-    
+
 ##### Vermoegen
+
     {
       "bausparvertraege": [ Bausparvertrag ],
       "lebensversicherungen": [ Lebensversicherung ]
     }
 
 ###### Bausparvertrag
+
     {
       "angesparterBetrag": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
       "sparbeitragMonatlich": BigDecimal
     }
-    
+
 ###### Lebensversicherung
+
     {
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
       "praemieMonatlich": BigDecimal,
@@ -618,13 +618,13 @@ The `beschaeftigungsart` determines which data is available. For example the `be
     }
 
 ###### Darlehen
-    
+
     {
       "rateMonatlich": BigDecimal,
       "restschuld": BigDecimal,
       "zinsbindungBis": "YYYY-MM-DD"
     }
-    
+
 #### Finanzbedarf
 
     {
@@ -638,12 +638,11 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEUGKAUF`.
 
 ##### Fahrzeugkauf
-    
+
     {
       "anbieter": "HAENDLER" | "PRIVAT",
       "beglicheneKosten": BigDecimal,
       "erstzulassungsdatum": "YYYY-MM-DD",
-      "kaufpreis": BigDecimal,
       "kaufpreis": BigDecimal,
       "kw": Integer, 
       "laufleistung": Integer,
@@ -661,15 +660,15 @@ The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEU
       "ratenzahlungstermin": "MONATSMITTE" | "MONATSENDE",
       "provisionswunschInProzent": BigDecimal
     }
-    
+
 ##### FinanzbedarfRatenschutz
-    
+
     {
       arbeitslosigkeitAbsicherung: RatenschutzAbsicherung,
       arbeitsunfaehigkeitAbsicherung: RatenschutzAbsicherung,
       todesfallAbsicherung: RatenschutzAbsicherung
     }
-    
+
 ###### RatenschutzAbsicherung
 
     {
@@ -721,7 +720,7 @@ In addition there is the value "SONSTIGE" ("other")
         "status": "MACHBAR" | "MACHBAR_UNTER_VORBEHALT" | "NICHT_MACHBAR"
       }
     }
-    
+
 The field `ausgehaendigtAm` shows only the timestamp of the most recent issuing of the Antrag.
 The field `produkttyp` can currently be one of the following values: `RATENKREDIT`, `BAUSPARKASSE_MODERNISIERUNGSKREDIT`
 
@@ -773,8 +772,9 @@ The percentage values (`effektivzins`, `sollzins`) are based on 100 (`1.23` inst
       "url": String,
       "name": String
     }
-    
+
 #### Identifikation
+
     {
       antragstellername: String 
       qesUrl: String
@@ -785,4 +785,5 @@ The percentage values (`effektivzins`, `sollzins`) are based on 100 (`1.23` inst
 The field `antragstellername` contains the name in the format "\<first name\> \<last name\>".
 
 ## Terms of use
+
 The APIs are made available under the following [Terms of Use](https://docs.api.europace.de/terms/).

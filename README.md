@@ -588,7 +588,6 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### Bausparvertrag
 
     {
-      "angesparterBetrag": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
       "sparbeitragMonatlich": BigDecimal
     }
@@ -597,8 +596,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 
     {
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
-      "praemieMonatlich": BigDecimal,
-      "rueckkaufswert": BigDecimal
+      "praemieMonatlich": BigDecimal
     }
 
 ##### Immobilie

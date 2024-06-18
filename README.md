@@ -215,6 +215,7 @@ The Europace 2 Partner-ID has 5-characters and has the format ABC12.
 #### Antragsteller
 
     {
+      "id": String!,
       "personendaten": Personendaten,
       "wohnsituation": Wohnsituation,
       "beschaeftigung": Beschäftigung

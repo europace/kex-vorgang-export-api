@@ -717,7 +717,8 @@ In addition there is the value "SONSTIGE" ("other")
       "identifikationAntragsteller2" : Identifikation,
       "machbarkeit": {
         "status": "MACHBAR" | "MACHBAR_UNTER_VORBEHALT" | "NICHT_MACHBAR"
-      }
+      },
+      "bonitaetsrechnung": Bonitaetsrechnung
     }
 
 The field `ausgehaendigtAm` shows only the timestamp of the most recent issuing of the Antrag.
@@ -782,6 +783,29 @@ The percentage values (`effektivzins`, `sollzins`) are based on 100 (`1.23` inst
     }
 
 The field `antragstellername` contains the name in the format "\<first name\> \<last name\>".
+
+#### Bonitaetsrechnung
+
+    {
+        einnahmen: BonitaetsrechnungGroup
+        ausgaben: BonitaetsrechnungGroup
+        total: String
+    }
+
+##### BonitaetsrechnungGroup
+
+    {
+        positions: [BonitaetsrechnungPosition]
+        total: String
+    }
+
+##### BonitaetsrechnungPosition
+
+    {
+        label: String
+        value: String
+    }
+
 
 ## Terms of use
 

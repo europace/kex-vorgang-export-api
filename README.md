@@ -736,6 +736,10 @@ The field `produkttyp` can currently be one of the following values: `RATENKREDI
       "versicherteRisikenAntragsteller1": [ VersichertesRisiko ]
       "versicherteRisikenAntragsteller2": [ VersichertesRisiko ]
       "praemieMonatlich": BigDecimal
+      "praemieBrutto": BigDecimal
+      "praemieNetto": BigDecimal
+      "versicherungssumme": BigDecimal
+      "versicherteRate": BigDecimal
     }
 
 The type `VersichertesRisiko` can currently be one of the following values: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
@@ -805,7 +809,6 @@ The field `antragstellername` contains the name in the format "\<first name\> \<
         label: String
         value: String
     }
-
 
 ## Terms of use
 

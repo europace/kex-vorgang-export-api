@@ -733,13 +733,14 @@ The field `produkttyp` can currently be one of the following values: `RATENKREDI
 ##### Ratenschutz
 
     {
+      "praemieBrutto": BigDecimal
+      "praemieMonatlich": BigDecimal
+      "praemieNetto": BigDecimal
+      "produktanbieter": [Produktanbieter]
+      "versicherteRate": BigDecimal
+      "versicherungssumme": BigDecimal
       "versicherteRisikenAntragsteller1": [ VersichertesRisiko ]
       "versicherteRisikenAntragsteller2": [ VersichertesRisiko ]
-      "praemieMonatlich": BigDecimal
-      "praemieBrutto": BigDecimal
-      "praemieNetto": BigDecimal
-      "versicherungssumme": BigDecimal
-      "versicherteRate": BigDecimal
     }
 
 The type `VersichertesRisiko` can currently be one of the following values: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
@@ -747,6 +748,7 @@ The type `VersichertesRisiko` can currently be one of the following values: `ARB
 #### Ratenkredit
 
     {
+      "produktanbieter": Produktanbieter
       "produktanbieterId": String,
       "produktbezeichnung": String,
       "produktart": String,

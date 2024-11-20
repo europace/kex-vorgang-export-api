@@ -745,7 +745,7 @@ The field `produkttyp` can currently be one of the following values: `RATENKREDI
 
 The type `VersichertesRisiko` can currently be one of the following values: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
 
-#### Ratenkredit
+##### Ratenkredit
 
     {
       "produktanbieter": Produktanbieter
@@ -758,7 +758,7 @@ The type `VersichertesRisiko` can currently be one of the following values: `ARB
 
 The field `produktart` can currently be one of the following values: `AUTOKREDIT`, `MODERNISIERUNGSKREDIT`, `RATENKREDIT`, `BUSINESSKREDIT`
 
-#### Gesamtkonditionen
+##### Gesamtkonditionen
 
     {
       "auszahlungsbetrag": BigDecimal,
@@ -772,14 +772,14 @@ The field `produktart` can currently be one of the following values: `AUTOKREDIT
 
 The percentage values (`effektivzins`, `sollzins`) are based on 100 (`1.23` instead of `0.0123`).
 
-#### Dokument
+##### Dokument
 
     {
       "url": String,
       "name": String
     }
 
-#### Identifikation
+##### Identifikation
 
     {
       antragstellername: String 
@@ -790,7 +790,7 @@ The percentage values (`effektivzins`, `sollzins`) are based on 100 (`1.23` inst
 
 The field `antragstellername` contains the name in the format "\<first name\> \<last name\>".
 
-#### Bonitaetsrechnung
+##### Bonitaetsrechnung
 
     {
         einnahmen: BonitaetsrechnungGroup
@@ -798,14 +798,14 @@ The field `antragstellername` contains the name in the format "\<first name\> \<
         total: String
     }
 
-##### BonitaetsrechnungGroup
+###### BonitaetsrechnungGroup
 
     {
         positions: [BonitaetsrechnungPosition]
         total: String
     }
 
-##### BonitaetsrechnungPosition
+###### BonitaetsrechnungPosition
 
     {
         label: String

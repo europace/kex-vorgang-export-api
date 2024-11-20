@@ -812,6 +812,19 @@ The field `produktart` can currently be one of the following values: `AUTOKREDIT
 
 The type `VersichertesRisiko` can currently be one of the following values: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
 
+##### Produktanbieter
+
+    {
+      "logo": Logo
+      "name": String
+    }
+
+##### Logo
+
+    {
+      "svg": String
+    }
+
 ## Terms of use
 
 The APIs are made available under the following [Terms of Use](https://docs.api.europace.de/terms/).

@@ -730,66 +730,6 @@ The field `produkttyp` can currently be one of the following values: `RATENKREDI
       "unterlage": String
     }
 
-##### Ratenschutz
-
-    {
-      "praemieBrutto": BigDecimal
-      "praemieMonatlich": BigDecimal
-      "praemieNetto": BigDecimal
-      "produktanbieter": [Produktanbieter]
-      "versicherteRate": BigDecimal
-      "versicherungssumme": BigDecimal
-      "versicherteRisikenAntragsteller1": [ VersichertesRisiko ]
-      "versicherteRisikenAntragsteller2": [ VersichertesRisiko ]
-    }
-
-The type `VersichertesRisiko` can currently be one of the following values: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
-
-##### Ratenkredit
-
-    {
-      "produktanbieter": Produktanbieter
-      "produktanbieterId": String,
-      "produktbezeichnung": String,
-      "produktart": String,
-      "schlussrate": BigDecimal,
-      "vorlaufzinsenProTag": BigDecimal
-    }
-
-The field `produktart` can currently be one of the following values: `AUTOKREDIT`, `MODERNISIERUNGSKREDIT`, `RATENKREDIT`, `BUSINESSKREDIT`
-
-##### Gesamtkonditionen
-
-    {
-      "auszahlungsbetrag": BigDecimal,
-      "effektivzins": BigDecimal,
-      "gesamtkreditbetrag": BigDecimal,
-      "laufzeitInMonaten": Int,
-      "monatlicheRate": BigDecimal,
-      "nettokreditbetrag": BigDecimal,
-      "sollzins": BigDecimal
-    }
-
-The percentage values (`effektivzins`, `sollzins`) are based on 100 (`1.23` instead of `0.0123`).
-
-##### Dokument
-
-    {
-      "url": String,
-      "name": String
-    }
-
-##### Identifikation
-
-    {
-      antragstellername: String 
-      qesUrl: String
-      referenznummer: String
-      videolegitimationUrl: String
-    }
-
-The field `antragstellername` contains the name in the format "\<first name\> \<last name\>".
-
 ##### Bonitaetsrechnung
 
     {
@@ -811,6 +751,66 @@ The field `antragstellername` contains the name in the format "\<first name\> \<
         label: String
         value: String
     }
+
+##### Dokument
+
+    {
+      "url": String,
+      "name": String
+    }
+
+##### Gesamtkonditionen
+
+    {
+      "auszahlungsbetrag": BigDecimal,
+      "effektivzins": BigDecimal,
+      "gesamtkreditbetrag": BigDecimal,
+      "laufzeitInMonaten": Int,
+      "monatlicheRate": BigDecimal,
+      "nettokreditbetrag": BigDecimal,
+      "sollzins": BigDecimal
+    }
+
+The percentage values (`effektivzins`, `sollzins`) are based on 100 (`1.23` instead of `0.0123`).
+
+##### Identifikation
+
+    {
+      antragstellername: String 
+      qesUrl: String
+      referenznummer: String
+      videolegitimationUrl: String
+    }
+
+The field `antragstellername` contains the name in the format "\<first name\> \<last name\>".
+
+##### Ratenkredit
+
+    {
+      "produktanbieter": Produktanbieter
+      "produktanbieterId": String,
+      "produktbezeichnung": String,
+      "produktart": String,
+      "schlussrate": BigDecimal,
+      "vorlaufzinsenProTag": BigDecimal
+    }
+
+The field `produktart` can currently be one of the following values: `AUTOKREDIT`, `MODERNISIERUNGSKREDIT`, `RATENKREDIT`, `BUSINESSKREDIT`
+
+##### Ratenschutz
+
+    {
+      "praemieBrutto": BigDecimal
+      "praemieMonatlich": BigDecimal
+      "praemieNetto": BigDecimal
+      "produktanbieter": [Produktanbieter]
+      "versicherteRate": BigDecimal
+      "versicherungssumme": BigDecimal
+      "versicherteRisikenAntragsteller1": [ VersichertesRisiko ]
+      "versicherteRisikenAntragsteller2": [ VersichertesRisiko ]
+    }
+
+The type `VersichertesRisiko` can currently be one of the following values: `ARBEITSLOSIGKEIT`, `ARBEITSUNFAEHIGKEIT`, `LEBEN`
 
 ## Terms of use
 

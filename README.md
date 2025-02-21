@@ -718,11 +718,47 @@ In addition there is the value "SONSTIGE" ("other")
       "machbarkeit": {
         "status": "MACHBAR" | "MACHBAR_UNTER_VORBEHALT" | "NICHT_MACHBAR"
       },
-      "bonitaetsrechnung": Bonitaetsrechnung
+      "bonitaetsrechnung": Bonitaetsrechnung,
+      "bausparvertrag": Bausparprodukt
     }
 
 The field `ausgehaendigtAm` shows only the timestamp of the most recent issuing of the Antrag.
 The field `produkttyp` can currently be one of the following values: `RATENKREDIT`, `BAUSPARKASSE_MODERNISIERUNGSKREDIT`
+
+##### Bausparprodukt
+
+    {
+        "abschlussgebuehr": BigDecimal
+        "abschlussgebuehrRelativToBausparsumme": BigDecimal
+        "bausparsumme": BigDecimal
+        "darlehensphase": Darlehensphase
+        "jahresentgelt": BigDecimal
+        "laufzeitInMonaten": Integer
+        "sparphase": Sparphase
+        "tarifname": String
+        "zuteilungszeitpunkt": "YYYY-MM-DD"
+    }
+
+###### Sparphase 
+
+    {
+        "guthabenBeiZuteilung": BigDecimal
+        "guthabenzins": BigDecimal
+        "laufzeitInMonaten": Integer
+        "sparbeitragMonatlich": BigDecimal
+    }
+
+###### Darlehensphase 
+
+    {
+        "darlehenssumme": BigDecimal
+        "datumLetzteRate": "YYYY-MM-DD"
+        "effektivzins": BigDecimal
+        "laufzeitInMonaten": Integer
+        "rateMonatlich": BigDecimal
+        "schlussrate": BigDecimal
+        "sollzins": BigDecimal
+    }
 
 ##### BenoetigteUnterlage
 

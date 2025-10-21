@@ -327,6 +327,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
         "inProbezeit": true | false,
         "arbeitgeber": Arbeitgeber,
         "verbeamtetSeit": "YYYY-MM-DD"
+        "beschaeftigtSeit": "YYYY-MM-DD"
         "nettoeinkommenMonatlich": BigDecimal
       },
       "vorherigesBeschaeftigungsverhaeltnis": {

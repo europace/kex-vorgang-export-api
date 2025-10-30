@@ -416,6 +416,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ##### Kind
 
     {
+      "id": String,  
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
       "kindergeldFuer": "ERSTES_ODER_ZWEITES_KIND" | "DRITTES_KIND" | "AB_VIERTEM_KIND",
       "name": String,
@@ -435,6 +436,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### RatenkreditVerbindlichkeit
 
     {
+      "id": String,
       "rateMonatlich": BigDecimal
       "schlussrate": BigDecimal
       "datumLetzteRate": "YYYY-MM-DD"
@@ -452,6 +454,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### SonstigeVerbindlichkeit
 
     {
+      "id": String,
       "rateMonatlich": BigDecimal
       "schlussrate": BigDecimal
       "datumLetzteRate": "YYYY-MM-DD"
@@ -469,6 +472,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### KreditkartenVerbindlichkeit
 
     {
+      "id": String,
       "rateMonatlich": BigDecimal
       "zinssatz": BigDecimal
       "beanspruchterBetrag": BigDecimal
@@ -484,6 +488,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### DispostionskreditVerbindlichkeit
 
     {
+      "id": String,
       "zinssatz": BigDecimal
       "beanspruchterBetrag": BigDecimal
       "verfuegungsrahmen": BigDecimal
@@ -498,6 +503,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### LeasingVerbindlichkeit
 
     {
+      "id": String,
       "rateMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
       "glaeubiger": String,
@@ -517,6 +523,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### Mietausgabe
 
     {
+      "id": String,
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }   
@@ -524,6 +531,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### PrivateKrankenversicherung
 
     {
+      "id": String,
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     } 
@@ -531,6 +539,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### SonstigeAusgabe
 
     {
+      "id": String,
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     } 
@@ -538,6 +547,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### Unterhaltsverpflichtung
 
     {
+      "id": String,
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     } 
@@ -554,6 +564,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### EinkunftAusNebentaetigkeit
 
     {
+      "id": String,
       "beginnDerTaetigkeit": "YYYY-MM-DD",
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
@@ -562,6 +573,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### Ehegattenunterhalt
 
     {
+      "id": String,
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
@@ -569,6 +581,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### UnbefristeteZusatzrente
 
     {
+      "id": String,
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
@@ -576,6 +589,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### SonstigeEinnahme
 
     {
+      "id": String,
       "betragMonatlich": BigDecimal,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit
     }
@@ -590,6 +604,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### Bausparvertrag
 
     {
+      "id": String,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
       "sparbeitragMonatlich": BigDecimal
     }
@@ -597,6 +612,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ###### Lebensversicherung
 
     {
+      "id": String,
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
       "praemieMonatlich": BigDecimal
     }
@@ -604,6 +620,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 ##### Immobilie
 
     {
+      "id": String,
       "bezeichnung": String,
       "darlehen": [ Darlehen ],
       "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,

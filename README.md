@@ -719,7 +719,8 @@ In addition there is the value "SONSTIGE" ("other")
       "produktanbieterstatus": {
         "status": "NICHT_BEARBEITET" | "UNTERSCHRIEBEN" | "ABGELEHNT" | "AUTOMATISCH_ABGELEHNT" | "ZURUECKGESTELLT",
         "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
-        "kommentar": String
+        "kommentar": String,
+        "hinweise": [String]
       },
       "provisionsforderungsstatus": {
         "status": "VOLLSTAENDIG_AUSGEZAHLT",

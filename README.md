@@ -380,6 +380,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 
     {
       "staatsangehoerigkeit": Country
+      "weitereStaatsangehoerigkeiten": [ Country ]
       "steuerId": String
       "inDeutschlandSeit": "YYYY-MM-DD"
       "aufenthaltstitel": Aufenthaltstitel

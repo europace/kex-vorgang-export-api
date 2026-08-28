@@ -812,15 +812,22 @@ The field `produkttyp` can currently be one of the following values: `RATENKREDI
 ##### Digitalisierungsmerkmale
 
     {
-        "accountCheck": AccountCheck
+        "accountCheck": AccountCheck!
     }
 
 ###### AccountCheck
 
     {
-        "modus": "NONE" | "OPTIONAL" | "REQUIRED"
+        "modus": AccountCheckModus!
     }
 
+###### AccountCheck
+
+    {
+        NONE
+        OPTIONAL
+        REQUIRED
+    }
 
 ##### Dokument
 

@@ -739,7 +739,8 @@ In addition there is the value "SONSTIGE" ("other")
         "status": "MACHBAR" | "MACHBAR_UNTER_VORBEHALT" | "NICHT_MACHBAR"
       },
       "bonitaetsrechnung": Bonitaetsrechnung,
-      "bausparvertrag": Bausparprodukt
+      "bausparvertrag": Bausparprodukt,
+      "digitalisierungsmerkmale": "Digitalisierungsmerkmale"
     }
 
 The field `ausgehaendigtAm` shows only the timestamp of the most recent issuing of the Antrag.
@@ -807,6 +808,19 @@ The field `produkttyp` can currently be one of the following values: `RATENKREDI
         label: String
         value: String
     }
+
+##### Digitalisierungsmerkmale
+
+    {
+        "accountCheck": AccountCheck
+    }
+
+###### AccountCheck
+
+    {
+        "modus": "NONE" | "OPTIONAL" | "REQUIRED"
+    }
+
 
 ##### Dokument
 

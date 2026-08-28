@@ -821,7 +821,7 @@ The field `produkttyp` can currently be one of the following values: `RATENKREDI
         "modus": AccountCheckModus!
     }
 
-###### AccountCheck
+###### AccountCheckModus
 
     {
         NONE

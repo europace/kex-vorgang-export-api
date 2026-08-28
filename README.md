@@ -740,7 +740,7 @@ In addition there is the value "SONSTIGE" ("other")
       },
       "bonitaetsrechnung": Bonitaetsrechnung,
       "bausparvertrag": Bausparprodukt,
-      "digitalisierungsmerkmale": "Digitalisierungsmerkmale"
+      "digitalisierungsmerkmale": Digitalisierungsmerkmale
     }
 
 The field `ausgehaendigtAm` shows only the timestamp of the most recent issuing of the Antrag.

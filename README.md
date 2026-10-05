@@ -432,6 +432,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "kreditkarten" : [KreditkartenVerbindlichkeit]
       "dispositionskredite" : [DispostionskreditVerbindlichkeit]
       "leasings" : [LeasingVerbindlichkeit]
+      "ratenkaeufe" : [RatenkaufVerbindlichkeit]
     }
 
 ###### RatenkreditVerbindlichkeit
@@ -510,6 +511,16 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "glaeubiger": String,
       "schlussrate": BigDecimal,
       "datumLetzteRate": "YYYY-MM-DD"
+    }
+
+###### RatenkaufVerbindlichkeit
+
+    {
+      "id": String,
+      "rateMonatlich": BigDecimal,
+      "gehoertZuAntragsteller": Antragstellerzugehoerigkeit,
+      "glaeubiger": String,
+      "restschuld": BigDecimal
     }
 
 ##### Ausgaben

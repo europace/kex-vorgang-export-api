@@ -184,6 +184,7 @@ More information about error codes can be found [here](https://docs.api.europace
       "antragsteller2": Antragsteller,
       "haushalt": Haushalt,
       "finanzbedarf": Finanzbedarf,
+      "kommunikationsangaben": Kommunikationsangaben,
       "aufbewahrung": {
         "grund": "LEAD", "BERATERHAFTUNG", "GESCHAEFTSNACHWEIS",
   	    "endetAm": "yyyy-MM-dd"
@@ -708,6 +709,24 @@ The field `fahrzeugkauf` is only available if the Finanzierungszweck is `FAHRZEU
       vorhanden: Boolean,
       wichtig: Boolean
     }
+
+#### Kommunikationsangaben
+
+> ⚠️ **Note:** The new Kommunikationsangaben are available for the technical preparation and implementation of your API integration. Please do not use Kommunikationsangaben in production yet. Production use will be enabled together with the corresponding support in KreditSmart on November 19, 2026.
+
+    {
+      "bereitstellungswegSecci": "DIGITAL" | "DIGITAL_PAPIER",
+      "kommunikationswegNachVertragsschluss": "DIGITAL" | "PAPIER",
+      "kommunikationswegErinnerungWiderrufsrecht": "DIGITAL" | "PAPIER",
+      "kommunikationswegWiderruf": "DIGITAL" | "PAPIER"
+    }
+
+The Kommunikationsangaben are stored on Vorgang level and apply to both Antragsteller.
+
+* `bereitstellungswegSecci`: provision of the pre-contractual information (SECCI), either digital only or digital and additionally by post (`DIGITAL_PAPIER`)
+* `kommunikationswegNachVertragsschluss`: communication about changes after conclusion of the contract
+* `kommunikationswegErinnerungWiderrufsrecht`: reminder of the right of withdrawal
+* `kommunikationswegWiderruf`: exercise of a possible withdrawal
 
 #### Country
 

@@ -186,13 +186,13 @@ More information about error codes can be found [here](https://docs.api.europace
       "finanzbedarf": Finanzbedarf,
       "kommunikationsangaben": Kommunikationsangaben,
       "aufbewahrung": {
-        "grund": "LEAD", "BERATERHAFTUNG", "GESCHAEFTSNACHWEIS",
+        "grund": "LEAD" | "BERATERHAFTUNG" | "GESCHAEFTSNACHWEIS",
   	    "endetAm": "yyyy-MM-dd"
       },
       "letzteAenderungAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "letztesEreignisAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
       "erstelltAm": "yyyy-MM-dd'T'HH:mm:ss.SSS",
-      "prioritaet": "HOCH", "NEUTRAL", "NIEDRIG",
+      "prioritaet": "HOCH" | "NEUTRAL" | "NIEDRIG",
       "vorgangsstatus": {
         "status": "AKTIV" | "ARCHIVIERT"
       },
@@ -304,7 +304,6 @@ The `beschaeftigungsart` determines which data is available. For example the `be
       "berufsbezeichnung": String,
       "firma": Firma,
       "selbststaendigSeit": "YYYY-MM-DD",
-      "selbststaendigSeit": "YYYY-MM-DD",
       "nettoeinkommenJaehrlich": BigDecimal,
       "bruttoEinkommenLaufendesJahr": BigDecimal,
       "einkommenssteuerLaufendesJahr": BigDecimal,
@@ -359,7 +358,7 @@ The `beschaeftigungsart` determines which data is available. For example the `be
 
     {
       "anschrift": Anschrift,
-      "brance": Branche,
+      "branche": Branche,
       "name": String
     }
 
@@ -844,26 +843,23 @@ The field `produkttyp` can currently be one of the following values: `RATENKREDI
 ##### Digitalisierungsmerkmale
 
     {
-        "accountCheck": AccountCheck!
+        "accountCheck": AccountCheck
     }
 
 ###### AccountCheck
 
     {
-        "modus": AccountCheckModus!
+        "modus": AccountCheckModus
     }
 
 ###### AccountCheckModus
 
-    {
-        NONE
-        OPTIONAL
-        REQUIRED
-    }
+    "NONE" | "OPTIONAL" | "REQUIRED"
 
 ##### Dokument
 
     {
+      "id": String,
       "url": String,
       "name": String
     }
